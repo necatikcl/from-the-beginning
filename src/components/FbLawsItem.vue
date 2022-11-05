@@ -1,0 +1,145 @@
+<style lang="scss" scoped>
+.fb-laws-item {
+  @apply
+  bg-white
+  rounded-lg
+  border
+  border-gray-200
+  text-left
+  flex flex-col
+  hover:border-gray-300
+  hover:bg-gray-50;
+
+  &-title {
+    @apply text-xl flex items-center p-4 border-b border-gray-200 w-full;
+  }
+
+  &-icon {
+    @apply text-2xl mr-3;
+  }
+
+  &-active {
+    .fb-laws-item {
+      &-badge {
+        @apply scale-100;
+      }
+    }
+  }
+
+  &-badge {
+    @apply absolute top-1 right-2 transform scale-0 transition-transform;
+  }
+
+  &-features {
+    @apply rounded-sm p-4;
+  }
+
+  &-feature {
+    @apply text-xs;
+
+    &:not(:last-child) {
+      @apply mb-1;
+    }
+  }
+
+  &-feature:before {
+    content: '⋅ '
+  }
+
+  &-orange {
+    .fb-laws-item {
+      &-icon, &-badge {
+        @apply text-orange-500;
+      }
+
+      &-active {
+        @apply border-orange-500 hover:border-orange-600;
+      }
+    }
+  }
+
+  &-green {
+    .fb-laws-item {
+      &-icon, &-badge {
+        @apply text-green-500;
+      }
+
+      &-active {
+        @apply border-green-500 hover:border-green-600;
+      }
+    }
+  }
+
+  &-blue {
+    .fb-laws-item {
+      &-icon, &-badge {
+        @apply text-blue-500;
+      }
+
+      &-active {
+        @apply border-blue-500 hover:border-blue-600;
+      }
+    }
+  }
+}
+</style>
+
+<template>
+  <button
+    type="button"
+    class="fb-laws-item"
+    :class="[
+      {
+        'fb-laws-item-active': law.active,
+      },
+      `fb-laws-item-${colors[law.key]}`,
+    ]"
+    @click="law.toggle"
+  >
+    <div class="fb-laws-item-badge">
+      <fb-icon icon="check-circle" />
+    </div>
+    <div class="fb-laws-item-title">
+      <div class="fb-laws-item-icon">
+        <fb-icon :icon="icons[lawKey]" />
+      </div>
+      {{ translate(`laws.${lawKey}`) }}
+    </div>
+    <ul class="fb-laws-item-features">
+      <li class="fb-laws-item-feature" v-for="feature in features" :key="feature">
+        {{ feature }}
+      </li>
+    </ul>
+  </button>
+</template>
+
+<script setup lang="ts">
+import { translate } from '@/locale';
+import type { Law, LawKey } from '@/stores/laws/types';
+import { computed } from 'vue';
+import useLaws from '@/stores/laws';
+
+export interface Props {
+  lawKey: LawKey
+}
+
+const props = defineProps<Props>();
+
+const lawsStore = useLaws();
+
+const icons: { [K in LawKey]: string } = {
+  diligence: 'hand-fist',
+  land: 'leaf',
+  urbanization: 'city',
+};
+
+const colors: { [K in LawKey]: string } = {
+  diligence: 'orange',
+  land: 'green',
+  urbanization: 'blue',
+};
+
+const law = computed(() => lawsStore.items.find((l) => l.key === props.lawKey) as Law);
+
+const features = computed(() => translate(`laws.${props.lawKey}.features`));
+</script>

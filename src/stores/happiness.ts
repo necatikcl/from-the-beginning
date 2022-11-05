@@ -3,7 +3,7 @@ import { defineStore } from 'pinia';
 import useNumberMap from '@/composables/useNumberMap';
 import useResources, { resourceKeys } from './resources';
 
-const BASE_HAPPINESS = 100;
+export const BASE_HAPPINESS = 100;
 
 const useHappinessStore = defineStore('happiness', () => {
   const resources = useResources();
@@ -27,15 +27,14 @@ const useHappinessStore = defineStore('happiness', () => {
     const revenuePercentage = bonusRevenue.value / 100;
 
     resourceKeys.forEach((key) => {
-      const revenuesArr = Object.entries(resources[key].revenues);
+      const resource = resources[key];
 
-      const revenuePerSecond = revenuesArr.reduce((acc, [revenueKey, value]) => {
-        if (value <= 0 || revenueKey === 'happiness') return acc;
+      const revenuePerSecond = resource.getFilteredTotalRevenue(
+        'resources.happiness',
+        (value) => value > 0,
+      );
 
-        return acc + value;
-      }, 0);
-
-      resources[key].setRevenue('resources.happiness', revenuePerSecond * revenuePercentage);
+      resource.setRevenue('resources.happiness', revenuePerSecond * revenuePercentage);
     });
   });
 

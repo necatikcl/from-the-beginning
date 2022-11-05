@@ -30,6 +30,11 @@ import {
   faFrown,
   faFlushed,
   faAngry,
+  faHandFist,
+  faCheckCircle,
+  faLeaf,
+  faCity,
+  faChargingStation,
 } from '@fortawesome/free-solid-svg-icons';
 import App from './App.vue';
 import FbIcon from './components/FbIcon.vue';
@@ -67,6 +72,11 @@ library.add(
   faFlushed,
   faAngry,
   faLock,
+  faHandFist,
+  faCheckCircle,
+  faLeaf,
+  faCity,
+  faChargingStation,
 );
 
 const app = createApp(App);

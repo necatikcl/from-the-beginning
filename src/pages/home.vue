@@ -3,8 +3,9 @@
     <fb-town-hall />
     <fb-resources />
   </div>
-  <fb-jobs />
-  <fb-buildings />
+  <fb-tabs :items="items" />
+  <!-- <fb-jobs />
+  <fb-buildings /> -->
   <br>
   <br>
   <br>
@@ -24,6 +25,15 @@
   buildings:
   {{buildings}}
   <br>
+  <br>
+  happiness:
+  {{happiness}}
+  <br>
+  <br>
+  townHall:
+  {{townHall}}
+  <br>
+  <br>
 
   {{ count * 2 }}
 </template>
@@ -36,15 +46,42 @@ import FbTownHall from '@/components/FbTownHall.vue';
 import FbJobs from '@/components/FbJobs.vue';
 import FbResources from '@/components/FbResources.vue';
 import FbBuildings from '@/components/FbBuildings.vue';
-import useBuildings from '@/stores/buildings/base';
+import FbLaws from '@/components/FbLaws.vue';
+import FbTabs, { type Item } from '@/components/FbTabs.vue';
 import { locale } from '@/locale';
 import { ref } from 'vue';
+import useBuildings from '@/stores/buildings';
+import useHappinessStore from '@/stores/happiness';
+import useTownHall from '@/stores/townHall';
 
 const citizens = useCitizens();
 const resources = useResources();
 const buildings = useBuildings();
+const happiness = useHappinessStore();
+const townHall = useTownHall();
 
 const count = ref(2);
+
+const items: Item[] = [
+  {
+    key: 'jobs',
+    component: FbJobs,
+  },
+  {
+    key: 'buildings',
+    component: FbBuildings,
+  },
+  {
+    key: 'laws',
+    component: FbLaws,
+  },
+  {
+    key: 'science',
+  },
+  {
+    key: 'religion',
+  },
+];
 
 // @ts-ignore
 window.admin = {

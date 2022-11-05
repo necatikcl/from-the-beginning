@@ -53,9 +53,10 @@
 <script setup lang="ts">
 import { ref, watch, computed } from 'vue';
 
-import useTownHall from '@/stores/buildings/townHall';
 import useCitizens from '@/stores/citizens';
 import { translate } from '@/locale';
+import useTownHall from '@/stores/townHall';
+import formatNumber from '@/utils/formatNumber';
 import FbButton from './FbButton.vue';
 import FbTownHallImage from './FbTownHallImage.vue';
 
@@ -82,7 +83,7 @@ watch(() => [citizens.count, townHall.citizenIntervalTime, townHall.citizensCanB
 
 const citizenRecruitmentLabel = computed(() => {
   if (townHall.citizensCanBeRecruited) {
-    return translate('buildings.townHall.recruiting', nextCitizenSeconds.value);
+    return translate('buildings.townHall.recruiting', formatNumber(nextCitizenSeconds.value, 'compactInteger'));
   }
 
   return 'Max population in this level';

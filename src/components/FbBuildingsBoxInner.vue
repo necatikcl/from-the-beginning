@@ -1,6 +1,6 @@
 <style lang="scss" scoped>
   .fb-buildings-box {
-    @apply w-full relative p-4 rounded-lg bg-gray-50 not-disabled:hover:bg-gray-100 transition-colors flex flex-col;
+    @apply w-full relative p-4 rounded-lg border border-gray-200 not-disabled:hover:bg-gray-100 transition-colors flex flex-col;
 
     &:not(&-buildable) {
       @apply filter grayscale pointer-events-none;
@@ -91,8 +91,8 @@
 import { computed } from 'vue';
 import useResources from '@/stores/resources';
 import formatMs from '@/utils/formatMs';
-import useBuildings from '@/stores/buildings/base';
-import type { Building } from '@/stores/buildings/buildingList';
+import type { Building } from '@/config/buildings';
+import useBuildings from '@/stores/buildings';
 import FbResourceIcon from './FbResourceIcon.vue';
 
 export interface Props {

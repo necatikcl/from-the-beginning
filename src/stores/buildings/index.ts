@@ -1,6 +1,7 @@
-import { ref, computed } from 'vue';
+import { ref, computed, watch } from 'vue';
 import { defineStore } from 'pinia';
-import useResources, { type ResourceKey } from '../../resources';
+import useNumberMap from '@/composables/useNumberMap';
+import useResources, { type ResourceKey } from '../resources';
 import {
   useActiveLabour,
   useAvailableBuildings,
@@ -10,7 +11,7 @@ import {
   getBuildingRevenue,
   type LabourProgress,
 } from './utils';
-import type { Building } from '../buildingList';
+import type { Building } from '../../config/buildings';
 import useTownHall from '../townHall';
 
 const useBuildings = defineStore('buildings', () => {
@@ -19,6 +20,8 @@ const useBuildings = defineStore('buildings', () => {
   const townHall = useTownHall();
   const resources = useResources();
   const availableBuildings = useAvailableBuildings(owned);
+
+  const buildingOutputMultiplier = useNumberMap({ base: 1 });
 
   const {
     activeLabour,
@@ -52,7 +55,8 @@ const useBuildings = defineStore('buildings', () => {
 
   const addRevenues = (key: string, revenues: [ResourceKey, number][]) => {
     revenues.forEach(([resourceKey, amount]: [ResourceKey, number]) => {
-      resources[resourceKey].setRevenue(`buildings.${key}`, amount);
+      const multiplier = buildingOutputMultiplier.total.value;
+      resources[resourceKey].setRevenue(`buildings.${key}`, amount * multiplier);
     });
   };
 
@@ -61,6 +65,14 @@ const useBuildings = defineStore('buildings', () => {
       resources[resourceKey].setRevenue(`buildings.${key}`, 0);
     });
   };
+
+  watch(buildingOutputMultiplier.total, () => {
+    owned.value.forEach((key) => {
+      const revenues = getBuildingRevenue(key);
+
+      addRevenues(key, revenues);
+    });
+  });
 
   const completeBuilding = (key: Building['key']) => {
     delete labourProgresses[key];
@@ -79,7 +91,7 @@ const useBuildings = defineStore('buildings', () => {
         if (newPauseState === paused) return;
         paused = newPauseState;
 
-        if (newPauseState) {
+        if (paused) {
           removeRevenues(key, revenues);
         } else {
           addRevenues(key, revenues);
@@ -146,6 +158,7 @@ const useBuildings = defineStore('buildings', () => {
   );
 
   return {
+    buildingOutputMultiplier,
     activeLabour,
     owned,
     availableBuildings,

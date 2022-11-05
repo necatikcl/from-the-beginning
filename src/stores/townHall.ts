@@ -2,15 +2,16 @@ import {
   ref, watch, computed,
 } from 'vue';
 import { defineStore } from 'pinia';
-
 import useCitizens from '@/stores/citizens';
-import useConfig from './config';
-import useResources, { resourceKeys } from '../../resources';
+import useConfig from '../config/townHall';
+import useResources, { resourceKeys } from './resources';
+import useHappinessStore from './happiness';
 
 const useTownHall = defineStore('townHall', () => {
   const resources = useResources();
   const citizens = useCitizens();
   const config = useConfig();
+  const happinessStore = useHappinessStore();
 
   const level = ref(1);
 
@@ -33,25 +34,36 @@ const useTownHall = defineStore('townHall', () => {
     level.value += 1;
   };
 
-  const citizenIntervalTime = computed(() => config[level.value].citizenInterval);
+  const citizenIntervalTime = computed(() => {
+    const value = 20000 * ((140 - happinessStore.happiness) / 100);
+
+    return value - (value % 1000);
+  });
+
   const citizensCanBeRecruited = computed(() => config[level.value].citizens > citizens.count);
 
   let citizenInterval = 0;
+  let passedIntervalMs = 0;
 
-  watch([citizenIntervalTime, citizensCanBeRecruited], () => {
+  const checkRecruitmentTime = () => {
+    if (passedIntervalMs < citizenIntervalTime.value) return;
+
+    citizens.count += 1;
+    passedIntervalMs = 0;
+  };
+
+  watch(citizensCanBeRecruited, (newValue) => {
     clearInterval(citizenInterval);
+    passedIntervalMs = 0;
 
-    if (!citizensCanBeRecruited.value) {
-      return;
+    if (newValue) {
+      // @ts-ignore
+      citizenInterval = setInterval(() => {
+        passedIntervalMs += 25;
+
+        checkRecruitmentTime();
+      }, 25);
     }
-
-    // @ts-ignore
-    citizenInterval = setInterval(() => {
-      const byPercentage = citizens.count * 0.05;
-      const addition = byPercentage > 1 ? Math.floor(byPercentage) : 1;
-
-      citizens.count = Math.min(citizens.count + addition, config[level.value].citizens);
-    }, citizenIntervalTime.value);
   }, { immediate: true });
 
   return {

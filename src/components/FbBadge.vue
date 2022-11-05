@@ -13,18 +13,28 @@
   &-secondary {
     @apply bg-gray-200 text-gray-600 border-gray-300 border;
   }
+
+  &-sm {
+    @apply text-xs py-0.5;
+  }
 }
 </style>
 
 <template>
-  <span class="fb-badge" :class="`fb-badge-${type}`">
+  <span
+    class="fb-badge"
+    :class="{
+      [`fb-badge-${type}`]: type,
+      [`fb-badge-${size}`]: size,
+    }">
     <slot />
   </span>
 </template>
 
 <script setup lang="ts">
 export interface Props {
-  type?: 'danger' | 'success' | 'secondary'
+  type?: 'danger' | 'success' | 'secondary',
+  size?: 'sm'
 }
 
 defineProps<Props>();

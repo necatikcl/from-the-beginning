@@ -1,9 +1,9 @@
 <style lang="scss" scoped>
   .fb-jobs-box {
-    @apply p-4 rounded-lg bg-gray-50 flex flex-col items-center select-none;
+    @apply p-4 rounded-lg border border-gray-200 flex flex-col items-center select-none;
 
     &-icon {
-      @apply text-5xl mb-3 text-gray-400;
+      @apply text-4xl mb-3 text-gray-400;
     }
 
     &-subtitle {

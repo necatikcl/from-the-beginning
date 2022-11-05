@@ -8,7 +8,7 @@
         <fb-icon :icon="currentHappinessRange.icon" />
       </div>
       <div class="fb-resources-happiness-value">
-        {{ happinessStore.happiness }}
+        {{ formatNumber(happinessStore.happiness, "compact") }}
       </div>
     </div>
   </fb-popover-details>
@@ -16,29 +16,35 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import useHappinessStore from '@/stores/happiness';
+import useHappinessStore, { BASE_HAPPINESS } from '@/stores/happiness';
 import weightNumber from '@/utils/weightNumber';
 import { translate } from '@/locale';
 import type { MessageKey } from '@/locale/messages/en';
+import formatNumber from '@/utils/formatNumber';
 import FbPopoverDetails from './FbPopoverDetails.vue';
 import type { Item } from './FbPopoverDetails.vue';
 
 const happinessStore = useHappinessStore();
 
 const ranges = [
-  { value: 100, icon: 'grin-tears', label: 'feeling amazing' },
-  { value: 90, icon: 'laugh-beam', label: 'very happy!' },
-  { value: 80, icon: 'smile-beam', label: 'happy!' },
-  { value: 75, icon: 'meh', label: 'feeling normal' },
-  { value: 50, icon: 'frown', label: 'feeling bad' },
-  { value: 25, icon: 'flushed', label: 'very unhappy' },
-  { value: 0, icon: 'angry', label: 'hating you!' },
-];
+  { value: 100, icon: 'grin-tears' },
+  { value: 90, icon: 'laugh-beam' },
+  { value: 80, icon: 'smile-beam' },
+  { value: 75, icon: 'meh' },
+  { value: 50, icon: 'frown' },
+  { value: 25, icon: 'flushed' },
+  { value: 0, icon: 'angry' },
+] as const;
+
+type Range = {
+  value: typeof ranges[number]['value'],
+  icon: typeof ranges[number]['icon'],
+};
 
 const currentHappinessRange = computed(
   () => ranges.find(
     (range) => happinessStore.happiness >= range.value,
-  ) as { value: number, icon: string, label: string },
+  ) as Range,
 );
 
 const happinessImpactItems = computed(() => {
@@ -64,20 +70,17 @@ const data = computed(() => {
   const { type, text } = weightNumber(happinessStore.bonusRevenue / 100, 'percent');
 
   const items: Item[] = [
+    {
+      label: translate('happiness.base'),
+      value: formatNumber(BASE_HAPPINESS, 'compact'),
+    },
     ...happinessImpactItems.value,
     {
-      label: 'Total',
-      value: happinessStore.happiness,
-    },
-    {
-      seperator: true,
-    },
-    {
-      label: `<b>Your citizens are ${currentHappinessRange.value.label}</b>`,
+      label: `<b>${translate(`happiness.labels.${currentHappinessRange.value.value}`)}</b>`,
       value: 0,
     },
     {
-      label: 'Revenue impact',
+      label: translate('happiness.revenueImpact'),
       value: text,
       type,
     },

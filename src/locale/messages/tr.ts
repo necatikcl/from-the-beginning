@@ -25,9 +25,22 @@ const tr: Messages = {
   'resources.labour': 'İşgücü',
   'resources.capacity': 'Kapasite',
 
+  'tabs.jobs': 'Meslekler',
+  'tabs.buildings': 'Binalar',
+  'tabs.laws': 'Yasalar',
+
   level: 'Seviye',
   upgrade: 'Yükselt',
   'revenue/s': 'Gelir/sn',
+
+  'laws.diligence': 'Çalışkanlık yasası',
+  'laws.diligence.features': [
+    'Tüm meslek üretimleri ikiye katlanır',
+    'Vatandaşların yemek tüketimi ikiye katlanır',
+    'İşsiz vatandaşlar yemek üretmez',
+    'İşsiz vatandaş başı -1 mutluluk verir',
+    'Yeni vatantaş süresi ikiye katlanır',
+  ],
 };
 
 export default tr;

@@ -19,10 +19,17 @@ const compactFormatter = new Intl.NumberFormat('en-US', {
   maximumFractionDigits: 3,
 });
 
+const compactIntegerFormatter = new Intl.NumberFormat('en-US', {
+  notation: 'compact',
+  compactDisplay: 'short',
+  maximumFractionDigits: 0,
+});
+
 const formatters = {
   currency: currencyFormatter,
   percent: percentFormatter,
   compact: compactFormatter,
+  compactInteger: compactIntegerFormatter,
   percentDetailed: percentDetailedFormatter,
 };
 

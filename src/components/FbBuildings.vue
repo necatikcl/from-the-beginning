@@ -1,13 +1,11 @@
 <style lang="scss" scoped>
   .fb-buildings {
-    @apply mt-8;
-
     &-title {
-      @apply uppercase font-bold text-sm text-gray-500 mb-3;
+      @apply text-sm text-gray-500 mb-3;
     }
 
     &-grid {
-      @apply grid grid-cols-6 gap-4 mb-4;
+      @apply grid grid-cols-6 gap-4 mb-6;
     }
   }
   </style>
@@ -15,7 +13,7 @@
 <template>
   <div class="fb-buildings">
     <template v-if="buildings.availableBuildings.length > 0">
-      <div class="fb-buildings-title">Buildings</div>
+      <div class="fb-buildings-title">Available buildings</div>
       <div class="fb-buildings-grid">
         <fb-buildings-box
           v-for="building in buildings.availableBuildings"
@@ -38,7 +36,7 @@
 </template>
 
 <script setup lang="ts">
-import useBuildings from '@/stores/buildings/base';
+import useBuildings from '@/stores/buildings';
 import FbBuildingsBox from './FbBuildingsBox.vue';
 
 const buildings = useBuildings();

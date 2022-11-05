@@ -3,11 +3,11 @@ import { defineStore } from 'pinia';
 import useNumberMap from '@/composables/useNumberMap';
 
 const INITIAL_RESOURCES = {
-  food: 250,
-  gold: 100,
-  wood: 50,
+  food: 200,
+  gold: 0,
+  wood: 0,
   iron: 0,
-  labour: 100,
+  labour: 0,
 } as const;
 
 export type ResourceKey = keyof typeof INITIAL_RESOURCES;
@@ -21,6 +21,7 @@ export const resourceHandler = (key: ResourceKey) => {
     total: revenuePerSecond,
     setItem: setRevenue,
     deleteItem: deleteRevenue,
+    getFilteredTotal: getFilteredTotalRevenue,
   } = useNumberMap();
 
   const {
@@ -52,6 +53,7 @@ export const resourceHandler = (key: ResourceKey) => {
     revenues,
     revenuePerSecond,
     setRevenue,
+    getFilteredTotalRevenue,
     deleteRevenue,
     setCapacity,
     deleteCapacity,

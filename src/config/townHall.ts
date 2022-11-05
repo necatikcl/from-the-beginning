@@ -1,5 +1,5 @@
 import createConfig from '@/utils/createConfig';
-import type { ResourceKey } from '../../resources';
+import type { ResourceKey } from '../stores/resources';
 
 interface Level {
   capacities: {
@@ -9,7 +9,6 @@ interface Level {
     [K in ResourceKey]: number
   },
   citizens: number,
-  citizenInterval: number
 }
 
 interface Config {
@@ -33,7 +32,6 @@ export default createConfig<Config>(() => ({
       labour: 0,
     },
     citizens: 10,
-    citizenInterval: 20000,
   },
   2: {
     capacities: {
@@ -51,7 +49,6 @@ export default createConfig<Config>(() => ({
       labour: 0,
     },
     citizens: 25,
-    citizenInterval: 19000,
   },
   3: {
     capacities: {
@@ -69,7 +66,6 @@ export default createConfig<Config>(() => ({
       labour: 0,
     },
     citizens: 100,
-    citizenInterval: 18000,
   },
   4: {
     capacities: {
@@ -87,6 +83,5 @@ export default createConfig<Config>(() => ({
       labour: 0,
     },
     citizens: 1000,
-    citizenInterval: 20000,
   },
 }));

@@ -26,6 +26,7 @@ module.exports = {
     'import/extensions': 'off',
     'no-restricted-syntax': 'off',
     'vue/multi-word-component-names': 'off',
-    'vuejs-accessibility/click-events-have-key-events': 'off'
+    'vuejs-accessibility/click-events-have-key-events': 'off',
+    'vuejs-accessibility/mouse-events-have-key-events': 'off'
   },
 };

@@ -1,4 +1,4 @@
-import type { ResourceKey } from '../resources';
+import type { ResourceKey } from '../stores/resources';
 
 interface BuildingsUnstrictKeys {
   key: string,

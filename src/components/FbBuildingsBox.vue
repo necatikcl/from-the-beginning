@@ -17,11 +17,10 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import useResources from '@/stores/resources';
-import useBuildings from '@/stores/buildings/base';
-import type { Building } from '@/stores/buildings/buildingList';
+import useBuildings from '@/stores/buildings';
+import type { Building } from '@/config/buildings';
 import { translate } from '@/locale';
-import weightNumber from '@/utils/weightNumber';
-import useTownHall from '@/stores/buildings/townHall';
+import useTownHall from '@/stores/townHall';
 import FbPopoverDetails, { type Item } from './FbPopoverDetails.vue';
 import FbBuildingsBoxInner from './FbBuildingsBoxInner.vue';
 

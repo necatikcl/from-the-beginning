@@ -1,7 +1,11 @@
 <template>
-  <div class="fb-popover group">
+  <div
+    class="fb-popover"
+    @mouseenter="hover = true"
+    @mouseleave="hover = false"
+  >
     <slot />
-    <div class="fb-popover-content">
+    <div class="fb-popover-content" v-if="hover">
       <div class="fb-popover-title">{{title}}</div>
       <div class="fb-popover-items">
         <div
@@ -27,6 +31,7 @@
 
 <script setup lang="ts">
 import type { ResourceKey } from '@/stores/resources';
+import { ref } from 'vue';
 import FbResourceIcon from './FbResourceIcon.vue';
 import FbTownHallImage from './FbTownHallImage.vue';
 
@@ -45,6 +50,8 @@ export interface Props {
 }
 
 defineProps<Props>();
+
+const hover = ref(false);
 </script>
 
 <style lang="scss" scoped>
@@ -55,8 +62,6 @@ defineProps<Props>();
       @apply
       min-w-48
         pointer-events-none
-        hidden
-        group-hover:block
         absolute
         top-full
         bg-white/50

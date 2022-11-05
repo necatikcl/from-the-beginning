@@ -43,7 +43,7 @@ import weightNumber from '@/utils/weightNumber';
 import type { ResourceKey } from '@/stores/resources';
 import useResources from '@/stores/resources';
 import { translate } from '@/locale';
-import type { Building } from '@/stores/buildings/buildingList';
+import type { Building } from '@/config/buildings';
 import FbBadge from './FbBadge.vue';
 import FbResourceIcon from './FbResourceIcon.vue';
 import FbPopoverDetails, { type Item } from './FbPopoverDetails.vue';
