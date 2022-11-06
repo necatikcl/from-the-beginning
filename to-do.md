@@ -16,7 +16,7 @@ Can create laws to manipulate the lives of civilians
   - -3 happiness per farmers
 - Law of Happiness
   - Halves all jobs production.
-  - Halves population penalty on happiness.
+  - Decreases population penalty by 0.1 per citizen.
   - Decreases citizen recruitment time by 25%.
 
 ### 2. Recruitment time based on happiness

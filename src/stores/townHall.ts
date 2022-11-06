@@ -3,9 +3,12 @@ import {
 } from 'vue';
 import { defineStore } from 'pinia';
 import useCitizens from '@/stores/citizens';
+import useNumberMap from '@/composables/useNumberMap';
 import useConfig from '../config/townHall';
 import useResources, { resourceKeys } from './resources';
 import useHappinessStore from './happiness';
+
+const BASE_CITIZEN_INTERVAL = 60000;
 
 const useTownHall = defineStore('townHall', () => {
   const resources = useResources();
@@ -34,35 +37,37 @@ const useTownHall = defineStore('townHall', () => {
     level.value += 1;
   };
 
-  const citizenIntervalTime = computed(() => {
-    const value = 20000 * ((140 - happinessStore.happiness) / 100);
+  const citizenIntervalMultiplier = useNumberMap({ base: 1 });
 
-    return value - (value % 1000);
+  const citizenIntervalTime = computed(() => {
+    const value = BASE_CITIZEN_INTERVAL * ((190 - happinessStore.happiness) / 100);
+
+    return (value - (value % 1000)) * citizenIntervalMultiplier.total.value;
   });
 
   const citizensCanBeRecruited = computed(() => config[level.value].citizens > citizens.count);
 
   let citizenInterval = 0;
-  let passedIntervalMs = 0;
+  const passedIntervalMs = ref(0);
 
   const checkRecruitmentTime = () => {
-    if (passedIntervalMs < citizenIntervalTime.value) return;
+    if (passedIntervalMs.value < citizenIntervalTime.value) return;
 
     citizens.count += 1;
-    passedIntervalMs = 0;
+    passedIntervalMs.value = 0;
   };
 
   watch(citizensCanBeRecruited, (newValue) => {
     clearInterval(citizenInterval);
-    passedIntervalMs = 0;
+    passedIntervalMs.value = 0;
 
     if (newValue) {
       // @ts-ignore
       citizenInterval = setInterval(() => {
-        passedIntervalMs += 25;
+        passedIntervalMs.value += 100;
 
         checkRecruitmentTime();
-      }, 25);
+      }, 100);
     }
   }, { immediate: true });
 
@@ -70,8 +75,10 @@ const useTownHall = defineStore('townHall', () => {
     level,
     upgrade,
     upgradeable,
+    passedIntervalMs,
     citizenIntervalTime,
     citizensCanBeRecruited,
+    citizenIntervalMultiplier,
   };
 });
 

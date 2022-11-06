@@ -66,6 +66,13 @@ const en = {
     '-3 happiness per farmers',
     '0.2 happiness per builder',
   ],
+
+  'laws.happiness': 'Happiness Law',
+  'laws.happiness.features': [
+    'Halves all jobs production.',
+    'Decreases population penalty by 0.1 per citizen.',
+    'Decreases citizen recruitment time by 25%.',
+  ],
 };
 
 export default en;

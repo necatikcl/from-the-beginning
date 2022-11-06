@@ -51,7 +51,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, computed } from 'vue';
+import { computed } from 'vue';
 
 import useCitizens from '@/stores/citizens';
 import { translate } from '@/locale';
@@ -63,27 +63,13 @@ import FbTownHallImage from './FbTownHallImage.vue';
 const townHall = useTownHall();
 const citizens = useCitizens();
 
-const nextCitizenSeconds = ref(0);
-
-let citizenInterval = 0;
-watch(() => [citizens.count, townHall.citizenIntervalTime, townHall.citizensCanBeRecruited], () => {
-  clearInterval(citizenInterval);
-
-  if (!townHall.citizensCanBeRecruited) {
-    nextCitizenSeconds.value = -1;
-    return;
-  }
-
-  nextCitizenSeconds.value = townHall.citizenIntervalTime / 1000;
-
-  citizenInterval = setInterval(() => {
-    nextCitizenSeconds.value -= 1;
-  }, 1000);
-}, { immediate: true });
+const nextCitizenSeconds = computed(
+  () => (townHall.citizenIntervalTime - townHall.passedIntervalMs) / 1000,
+);
 
 const citizenRecruitmentLabel = computed(() => {
   if (townHall.citizensCanBeRecruited) {
-    return translate('buildings.townHall.recruiting', formatNumber(nextCitizenSeconds.value, 'compactInteger'));
+    return translate('buildings.townHall.recruiting', formatNumber(nextCitizenSeconds.value, 'compact'));
   }
 
   return 'Max population in this level';

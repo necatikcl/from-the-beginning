@@ -51,10 +51,10 @@
       &-icon, &-badge {
         @apply text-orange-500;
       }
+    }
 
-      &-active {
-        @apply border-orange-500 hover:border-orange-600;
-      }
+    &.fb-laws-item-active {
+      @apply border-orange-500 hover:border-orange-600;
     }
   }
 
@@ -63,10 +63,10 @@
       &-icon, &-badge {
         @apply text-green-500;
       }
+    }
 
-      &-active {
-        @apply border-green-500 hover:border-green-600;
-      }
+    &.fb-laws-item-active {
+      @apply border-green-500 hover:border-green-600;
     }
   }
 
@@ -75,10 +75,22 @@
       &-icon, &-badge {
         @apply text-blue-500;
       }
+    }
 
-      &-active {
-        @apply border-blue-500 hover:border-blue-600;
+    &.fb-laws-item-active {
+      @apply border-blue-500 hover:border-blue-600;
+    }
+  }
+
+  &-lime {
+    .fb-laws-item {
+      &-icon, &-badge {
+        @apply text-lime-400;
       }
+    }
+
+    &.fb-laws-item-active {
+      @apply border-lime-400 hover:border-lime-600;
     }
   }
 }
@@ -131,12 +143,14 @@ const icons: { [K in LawKey]: string } = {
   diligence: 'hand-fist',
   land: 'leaf',
   urbanization: 'city',
+  happiness: 'smile-beam',
 };
 
 const colors: { [K in LawKey]: string } = {
   diligence: 'orange',
   land: 'green',
   urbanization: 'blue',
+  happiness: 'lime',
 };
 
 const law = computed(() => lawsStore.items.find((l) => l.key === props.lawKey) as Law);

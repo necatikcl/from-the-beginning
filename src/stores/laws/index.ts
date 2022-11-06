@@ -10,6 +10,7 @@ import setHappinessImpact from './articles/setHappinessImpact';
 import increaseResourceProduction from './articles/increaseResourceProduction';
 import increaseBuildingProductions from './articles/increaseBuildingProductions';
 import increasePopulationPenalty from './articles/increasePopulationPenalty';
+import increaseCitizenRecruitmentTime from './articles/increaseCitizenRecruitmentTime';
 
 const diligence = createLaw('diligence', (props) => {
   increaseJobProduction({
@@ -36,6 +37,24 @@ const diligence = createLaw('diligence', (props) => {
   increasePopulationPenalty({
     ...props,
     value: -0.2,
+  });
+});
+
+const happiness = createLaw('happiness', (props) => {
+  increaseJobProduction({
+    ...props,
+    multiplier: 0.5,
+    jobsToInclude: [...jobKeys],
+  });
+
+  increasePopulationPenalty({
+    ...props,
+    value: 0.1,
+  });
+
+  increaseCitizenRecruitmentTime({
+    ...props,
+    additionalMultiplier: -0.25,
   });
 });
 
@@ -100,7 +119,7 @@ const urbanization = createLaw('urbanization', (props) => {
 });
 
 const useLaws = defineStore('diligenceStore', () => {
-  const items = [diligence(), land(), urbanization()];
+  const items = [diligence(), land(), urbanization(), happiness()];
 
   return { items };
 });
