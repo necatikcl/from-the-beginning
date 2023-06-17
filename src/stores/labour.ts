@@ -9,7 +9,7 @@ const useLabourStore = defineStore('labour', () => {
     deleteItem: deleteImpact,
     setItem: setImpact,
     getFilteredTotal: getFilteredImpacts,
-  } = useNumberMap();
+  } = useNumberMap('labour');
 
   return {
     impacts,

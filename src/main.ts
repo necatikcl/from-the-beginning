@@ -80,6 +80,8 @@ library.add(
 );
 
 const app = createApp(App);
+
+// @ts-ignore
 app.component('FontAwesomeIcon', FontAwesomeIcon);
 app.component('FbIcon', FbIcon);
 

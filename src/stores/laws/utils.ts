@@ -1,9 +1,9 @@
-import { ref } from 'vue';
+import { useStorage } from '@vueuse/core';
 
 import type { LawArticle, LawKey } from './types';
 
 const createLaw = (key: LawKey, articles: (props: LawArticle) => void) => () => {
-  const active = ref(false);
+  const active = useStorage(`${key}.active`, false);
 
   articles({ key, active });
 

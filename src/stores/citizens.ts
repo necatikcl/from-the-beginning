@@ -1,10 +1,12 @@
+import { useStorage } from '@vueuse/core';
 import { defineStore } from 'pinia';
 import {
-  ref, reactive, watch, computed, watchEffect,
+  reactive, watch, computed, watchEffect,
 } from 'vue';
 
 import useNumberMap, { type NumberMap } from '@/composables/useNumberMap';
 import { getObjectEntries } from '@/utils/getObjectEntries';
+import storage from '@/utils/storage';
 
 import useHappinessStore from './happiness';
 import useLabourStore from './labour';
@@ -23,33 +25,32 @@ export const jobResourceMap: {
   builders: 'labour',
 } as const;
 
-const useTypedJobs = <T extends object = { [K in Job]: number }>
-  (defaultStates: T) => reactive<T>(defaultStates);
-
 const useCitizens = defineStore('citizens', () => {
   const resources = useResources();
   const labour = useLabourStore();
   const happinessStore = useHappinessStore();
 
-  const citizenCount = ref(5);
+  const citizenCount = useStorage('citizens.citizenCount', 5);
 
-  const jobs = useTypedJobs({
+  const jobs = reactive<{ [K in Job]: number }>(storage.get('citizens.jobs') || {
     farmers: 0,
     merchants: 0,
     builders: 0,
   });
 
+  watch(jobs, () => storage.set('citizens.jobs', jobs));
+
   const jobIncrements: { [key in Job]: NumberMap } = {
-    farmers: useNumberMap({ base: 2 }),
-    merchants: useNumberMap({ base: 1 }),
-    builders: useNumberMap({ base: 1 }),
+    farmers: useNumberMap('citizens.farmersIncrements', { base: 2 }),
+    merchants: useNumberMap('citizens.merchantsIncrements', { base: 1 }),
+    builders: useNumberMap('citizens.buildersIncrements', { base: 1 }),
   } as const;
 
   const citizensWithJobs = computed(() => Object.values(jobs).reduce((acc, val) => acc + val, 0));
 
-  const idleIncrements = useNumberMap({ base: 1 });
-  const foodConsumption = useNumberMap({ base: -0.9 });
-  const populationPenalty = useNumberMap({ base: -0.2 });
+  const idleIncrements = useNumberMap('idle.increments', { base: 1 });
+  const foodConsumption = useNumberMap('citizens.foodConsumption', { base: -0.9 });
+  const populationPenalty = useNumberMap('citizens.populationPenalty', { base: -0.2 });
 
   const idle = computed(() => {
     const idleCount = citizenCount.value - citizensWithJobs.value;

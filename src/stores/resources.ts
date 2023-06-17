@@ -1,5 +1,6 @@
+import { useStorage } from '@vueuse/core';
 import { defineStore } from 'pinia';
-import { computed, nextTick, ref } from 'vue';
+import { computed, nextTick } from 'vue';
 
 import useNumberMap from '@/composables/useNumberMap';
 
@@ -12,7 +13,9 @@ export type ResourceKey = keyof typeof INITIAL_RESOURCES;
 export const resourceKeys = Object.keys(INITIAL_RESOURCES) as ResourceKey[];
 
 export const resourceHandler = (key: ResourceKey) => {
-  const resource = ref<number>(INITIAL_RESOURCES[key]);
+  const storageKey = `resources.${key}`;
+
+  const resource = useStorage<number>(storageKey, INITIAL_RESOURCES[key]);
 
   const {
     data: revenues,
@@ -20,14 +23,14 @@ export const resourceHandler = (key: ResourceKey) => {
     setItem: setRevenue,
     deleteItem: deleteRevenue,
     getFilteredTotal: getFilteredTotalRevenue,
-  } = useNumberMap();
+  } = useNumberMap(`${storageKey}.revenues`);
 
   const {
     data: capacities,
     total: capacity,
     setItem: setCapacity,
     deleteItem: deleteCapacity,
-  } = useNumberMap();
+  } = useNumberMap(`${storageKey}.capacities`);
 
   const value = computed({
     get() {

@@ -1,7 +1,6 @@
+import { useStorage } from '@vueuse/core';
 import { defineStore } from 'pinia';
-import {
-  ref, watch, computed,
-} from 'vue';
+import { watch, computed } from 'vue';
 
 import useNumberMap from '@/composables/useNumberMap';
 import useCitizens from '@/stores/citizens';
@@ -11,7 +10,7 @@ import useConfig from '../config/townHall';
 import useHappinessStore from './happiness';
 import useResources, { resourceKeys } from './resources';
 
-const BASE_CITIZEN_INTERVAL = 60000;
+const BASE_CITIZEN_INTERVAL = 5000;
 
 const useTownHall = defineStore('townHall', () => {
   const resources = useResources();
@@ -19,7 +18,7 @@ const useTownHall = defineStore('townHall', () => {
   const config = useConfig();
   const happinessStore = useHappinessStore();
 
-  const level = ref(1);
+  const level = useStorage('townHall.level', 1);
 
   watch(level, () => {
     resourceKeys.forEach((key) => {
@@ -31,7 +30,7 @@ const useTownHall = defineStore('townHall', () => {
   }, { immediate: true });
 
   const upgradeable = computed(() => resources.food.value === resources.food.capacity
-  && resources.gold.value === resources.gold.capacity);
+    && resources.gold.value === resources.gold.capacity);
 
   const upgrade = () => {
     if (!upgradeable.value) return;
@@ -40,7 +39,7 @@ const useTownHall = defineStore('townHall', () => {
     level.value += 1;
   };
 
-  const citizenIntervalMultiplier = useNumberMap({ base: 1 });
+  const citizenIntervalMultiplier = useNumberMap('townHall.citizenIntervalMultiplier', { base: 1 });
 
   const citizenIntervalTime = computed(() => {
     const value = BASE_CITIZEN_INTERVAL * ((190 - happinessStore.happiness) / 100);
@@ -51,7 +50,7 @@ const useTownHall = defineStore('townHall', () => {
   const citizensCanBeRecruited = computed(() => config[level.value].citizens > citizens.count);
 
   let citizenInterval = 0;
-  const passedIntervalMs = ref(0);
+  const passedIntervalMs = useStorage('townHall.passedIntervalMs', 0);
 
   const checkRecruitmentTime = () => {
     if (passedIntervalMs.value < citizenIntervalTime.value) return;
@@ -72,7 +71,15 @@ const useTownHall = defineStore('townHall', () => {
         checkRecruitmentTime();
       }, 100);
     }
-  }, { immediate: true });
+  });
+
+  if (citizensCanBeRecruited.value) {
+    citizenInterval = setInterval(() => {
+      passedIntervalMs.value += 100;
+
+      checkRecruitmentTime();
+    }, 100);
+  }
 
   return {
     level,

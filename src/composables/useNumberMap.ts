@@ -1,5 +1,6 @@
+import { useStorage } from '@vueuse/core';
 import {
-  computed, ref, type ComputedRef, type Ref,
+  computed, type ComputedRef, type Ref,
 } from 'vue';
 
 import fixNumber from '@/utils/fixNumber';
@@ -16,8 +17,8 @@ export interface NumberMap {
   ) => number,
 }
 
-const useNumberMap = (defaultData?: Data): NumberMap => {
-  const data = ref<Data>(defaultData || {});
+const useNumberMap = (mapKey: string, defaultData?: Data): NumberMap => {
+  const data = useStorage<Data>(mapKey, defaultData || {});
 
   const total = computed(() => Object.values(data.value)
     .reduce((acc, value) => acc + value, 0));

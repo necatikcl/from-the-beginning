@@ -1,7 +1,10 @@
+import { useStorage } from '@vueuse/core';
 import {
-  computed, reactive, ref,
+  computed, reactive,
 } from 'vue';
 import type { Ref } from 'vue';
+
+import storage from '@/utils/storage';
 
 import BUILDINGS, { type Building } from '../../config/buildings';
 import type { ResourceKey, TickListener } from '../resources';
@@ -16,8 +19,12 @@ export type LabourProgresses = {
 };
 
 export const useActiveLabour = () => {
-  const activeLabour = ref<Building['key']>();
-  const labourProgresses = reactive<LabourProgresses>({});
+  const activeLabour = useStorage<Building['key']>('buildings.activeLabour', null);
+  const labourProgresses = reactive<LabourProgresses>(storage.get('buildings.labourProgresses') || {});
+
+  watch(labourProgresses, () => {
+    storage.set('buildings.labourProgresses', labourProgresses);
+  });
 
   const hasProgress = (key: Building['key']) => labourProgresses[key] !== undefined;
   const isPaused = (key: Building['key']) => hasProgress(key) && activeLabour.value !== key;

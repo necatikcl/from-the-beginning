@@ -17,7 +17,7 @@ const useHappinessStore = defineStore('happiness', () => {
     total: happinessImpactTotal,
     deleteItem: deleteHappinessImpact,
     setItem: setHappinessImpact,
-  } = useNumberMap();
+  } = useNumberMap('happiness');
 
   const happiness = computed(() => BASE_HAPPINESS + happinessImpactTotal.value);
 

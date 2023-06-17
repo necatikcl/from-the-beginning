@@ -1,5 +1,6 @@
+import { useStorage } from '@vueuse/core';
 import { defineStore } from 'pinia';
-import { ref, computed, watch } from 'vue';
+import { computed, watch } from 'vue';
 
 import useNumberMap from '@/composables/useNumberMap';
 
@@ -19,14 +20,14 @@ import {
 } from './utils';
 
 const useBuildings = defineStore('buildings', () => {
-  const owned = ref<Building['key'][]>([]);
+  const owned = useStorage<Building['key'][]>('buildings.owned', []);
 
   const townHall = useTownHall();
   const resources = useResources();
   const labour = useLabourStore();
   const availableBuildings = useAvailableBuildings(owned);
 
-  const buildingOutputMultiplier = useNumberMap({ base: 1 });
+  const buildingOutputMultiplier = useNumberMap('buildings.buildingOutputMultiplier', { base: 1 });
 
   const {
     activeLabour,
