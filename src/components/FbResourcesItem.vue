@@ -31,7 +31,7 @@
 import { computed } from 'vue';
 
 import type { Building } from '@/config/buildings';
-import { translate } from '@/locale';
+import { MessageKey, translate } from '@/locale';
 import type { ResourceKey } from '@/stores/resources';
 import useResources from '@/stores/resources';
 import formatNumber from '@/utils/formatNumber';
@@ -50,12 +50,16 @@ const resource = computed(() => resources[props.name]);
 
 const revenueWeight = computed(() => weightNumber(resource.value.revenuePerSecond));
 
-const data = computed<Item[]>(() => {
+type DataItem = {
+  happiness: boolean
+} & Item
+
+const data = computed<DataItem[]>(() => {
   let buildingStatus = null;
   // @ts-ignore
-  const revenuesEntries = Object.entries(resource.value.revenues);
+  const revenuesEntries = Object.entries(resource.value.revenues) as [MessageKey, number][];
 
-  const revenues = revenuesEntries.flatMap(([key, value]: [string, number]) => {
+  const revenues = revenuesEntries.flatMap(([key, value]): DataItem[] | DataItem | boolean => {
     if (props.name === 'labour' && value === 0) {
       buildingStatus = {
         label: `<b>${translate('building')}:</b> ${translate(`buildings.${key as Building['key']}`)}`,
@@ -67,7 +71,6 @@ const data = computed<Item[]>(() => {
     const { text, type } = weightNumber(value);
 
     const item = {
-      // @ts-ignore
       label: translate(key),
       value: text,
       type,
@@ -77,10 +80,10 @@ const data = computed<Item[]>(() => {
       return [
         { ...item, happiness: true },
         { seperator: true, happiness: true },
-      ];
+      ] as DataItem[];
     }
 
-    return item;
+    return item as DataItem;
   }).filter(Boolean);
 
   revenues.sort((a: any) => (a.value < 0 ? 1 : -1));
@@ -109,7 +112,7 @@ const data = computed<Item[]>(() => {
         type: revenueWeight.value.type,
       },
     ] : []),
-  ];
+  ] as DataItem[];
 });
 
 const title = computed(() => translate(`resources.${props.name}`));

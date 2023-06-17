@@ -4,11 +4,11 @@ import { computed, nextTick, ref } from 'vue';
 import useNumberMap from '@/composables/useNumberMap';
 
 const INITIAL_RESOURCES = {
-  food: 200,
-  gold: 0,
-  wood: 0,
-  iron: 0,
-  labour: 0,
+  food: 250,
+  gold: 100,
+  wood: 50,
+  iron: 5,
+  labour: 100,
 } as const;
 
 export type ResourceKey = keyof typeof INITIAL_RESOURCES;
@@ -79,7 +79,6 @@ const useResources = defineStore('resources', () => {
 
   const tick = () => {
     ALL_RESOURCES.forEach(({ value, revenuePerSecond }) => {
-      // eslint-disable-next-line no-param-reassign
       value.value += revenuePerSecond.value;
     });
 

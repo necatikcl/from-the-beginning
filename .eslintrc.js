@@ -45,6 +45,7 @@ module.exports = {
     'import/extensions': 'off',
     '@typescript-eslint/no-unused-vars': ['off'],
     'vue/no-v-html': 'off',
+    'no-param-reassign': 'off',
     'vue/multi-word-component-names': 'off',
     'import/order': ['error', {
       'newlines-between': 'always',
