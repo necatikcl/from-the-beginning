@@ -76,8 +76,7 @@ const data = computed(() => {
       { seperator: true },
       {
         label: `
-          <b>${translate('building')}:</b> ${translate(`buildings.${buildingsStore.activeLabour}`)}
-          <br><small>${remainingBuildingSeconds.value}</small>
+          <small><b>${translate('building')}:</b> ${translate(`buildings.${buildingsStore.activeLabour}`)}<br>${remainingBuildingSeconds.value}</small>
           `,
         type: 'secondary',
         // value: '18:32',

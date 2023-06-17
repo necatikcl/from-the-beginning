@@ -67,7 +67,7 @@ const data = computed<DataItem[]>(() => {
 
     if (key === 'resources.happiness') {
       return [
-        { ...item, happiness: true },
+        { ...item, icon: 'happiness', happiness: true },
         { seperator: true, happiness: true },
       ] as DataItem[];
     }

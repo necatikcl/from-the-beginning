@@ -84,6 +84,7 @@ const useBuildings = defineStore('buildings', () => {
   const completeBuilding = (key: Building['key']) => {
     delete labourProgresses[key];
 
+    activeLabour.value = undefined;
     owned.value.push(key);
 
     let paused = false;
