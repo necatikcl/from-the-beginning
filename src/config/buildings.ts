@@ -9,9 +9,6 @@ interface BuildingsUnstrictKeys {
       [key in ResourceKey]?: number
     }
   },
-  capacity?: {
-    [key in ResourceKey]?: number
-  },
   revenue: {
     [key in ResourceKey]?: number
   }
@@ -31,9 +28,6 @@ const BUILDINGS = [
     revenue: {
       food: 2,
       gold: -0.5,
-    },
-    capacity: {
-      food: 100,
     },
   },
   {
