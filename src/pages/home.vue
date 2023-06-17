@@ -4,40 +4,42 @@
     <fb-resources />
   </div>
   <fb-tabs :items="items" />
-  <button
-    class="fixed bottom-4 left-4"
-    @click="clearStorage"
-  >
-    Reset
-  </button>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  locale: {{ locale }}
-  <br>
-  <br>
-  citizens:
-  {{ citizens }}
-  <br>
-  <br>
-  resources:
-  {{ resources }}
-  <br>
-  <br>
-  buildings:
-  {{ buildings }}
-  <br>
-  <br>
-  happiness:
-  {{ happiness }}
-  <br>
-  <br>
-  townHall:
-  {{ townHall }}
-  <br>
-  <br>
+  <template v-if="isDev">
+    <button
+      class="fixed bottom-4 left-4"
+      @click="clearStorage"
+    >
+      Reset
+    </button>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    locale: {{ locale }}
+    <br>
+    <br>
+    citizens:
+    {{ citizens }}
+    <br>
+    <br>
+    resources:
+    {{ resources }}
+    <br>
+    <br>
+    buildings:
+    {{ buildings }}
+    <br>
+    <br>
+    happiness:
+    {{ happiness }}
+    <br>
+    <br>
+    townHall:
+    {{ townHall }}
+    <br>
+    <br>
+  </template>
 </template>
 
 <script setup lang="ts">
@@ -52,6 +54,8 @@ import useCitizens from '@/stores/citizens';
 import useHappinessStore from '@/stores/happiness';
 import useResources from '@/stores/resources';
 import useTownHall from '@/stores/townHall';
+
+const isDev = import.meta.env.DEV;
 
 const citizens = useCitizens();
 const resources = useResources();
