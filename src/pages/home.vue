@@ -32,13 +32,9 @@
   {{ townHall }}
   <br>
   <br>
-
-  {{ count * 2 }}
 </template>
 
 <script setup lang="ts">
-
-import { ref } from 'vue';
 
 import FbBuildings from '@/components/FbBuildings.vue';
 import FbJobs from '@/components/FbJobs.vue';
@@ -56,8 +52,6 @@ const resources = useResources();
 const buildings = useBuildings();
 const happiness = useHappinessStore();
 const townHall = useTownHall();
-
-const count = ref(2);
 
 const items: Item[] = [
   {

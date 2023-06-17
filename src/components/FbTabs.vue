@@ -43,7 +43,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, type Component } from 'vue';
+import { useStorage } from '@vueuse/core';
+import { computed, type Component } from 'vue';
 
 export interface Item {
   key: 'jobs' | 'buildings' | 'laws' | 'science' | 'religion';
@@ -56,7 +57,7 @@ export interface Props {
 
 const props = defineProps<Props>();
 
-const activeTab = ref(props.items[0].key);
+const activeTab = useStorage<Item['key']>('ui.activeTab', props.items[0].key);
 
 const activeTabComponent = computed(
   () => props.items.find((item) => item.key === activeTab.value)?.component,
