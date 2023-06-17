@@ -69,17 +69,19 @@ const useResources = defineStore('resources', () => {
 
   const ALL_RESOURCES = [food, gold];
 
-  const tickHooks: TickListener[] = [];
+  const tickHooks = useStorage<TickListener[]>('resources.tickHooks', []);
 
-  const addTickListener = (fn: TickListener) => tickHooks.push(fn);
-  const removeTickListener = (fn: TickListener) => tickHooks.splice(tickHooks.indexOf(fn), 1);
+  const addTickListener = (fn: TickListener) => tickHooks.value.push(fn);
+  const removeTickListener = (fn: TickListener) => tickHooks.value.splice(
+    tickHooks.value.indexOf(fn), 1,
+  );
 
   const tick = () => {
     ALL_RESOURCES.forEach(({ value, revenuePerSecond }) => {
       value.value += revenuePerSecond.value;
     });
 
-    tickHooks.forEach((fn) => fn());
+    tickHooks.value.forEach((fn) => fn());
   };
 
   let interval = 0;

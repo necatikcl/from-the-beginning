@@ -102,6 +102,10 @@ const hover = ref(false);
 
       &-label {
         @apply mr-4 flex items-center;
+
+        :deep(small) {
+          @apply block -mt-1 text-gray-600;
+        }
       }
 
       &-value {

@@ -34,6 +34,17 @@ const formattedValue = computed(() => {
   return `+${formatNumber(labour.value, 'compact')}`;
 });
 
+const remainingBuildingSeconds = computed(() => {
+  if (!buildingsStore.activeLabour) return '';
+
+  const labourRemaining = buildingsStore.getBuildingLabourRemaining(buildingsStore.activeLabour);
+  const remainingTicks = labourRemaining / labour.value;
+
+  if (labour.value === 0) return translate('labour.emptyShort');
+
+  return formatMs(remainingTicks * 1000);
+});
+
 const data = computed(() => {
   const items: Item[] = [];
 
@@ -63,8 +74,12 @@ const data = computed(() => {
     items.push(
       { seperator: true },
       {
-        label: `<b>${translate('building')}:</b> ${translate(`buildings.${buildingsStore.activeLabour}`)}`,
+        label: `
+          <b>${translate('building')}:</b> ${translate(`buildings.${buildingsStore.activeLabour}`)}
+          <br><small>${remainingBuildingSeconds.value}</small>
+          `,
         type: 'secondary',
+        // value: '18:32',
       },
     );
   }
