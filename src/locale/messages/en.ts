@@ -13,6 +13,11 @@ const en = {
   'buildings.townHall.level': 'Level {n}',
   'buildings.townHall.recruiting': 'New in {n}s',
 
+  'labour.empty': 'No active labourer',
+  'labour.emptyShort': 'No labourer',
+
+  paused: 'Paused',
+
   'resources.happiness': 'Happiness',
   'resources.food': 'Food',
   'resources.gold': 'Gold',

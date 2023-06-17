@@ -4,8 +4,10 @@ import {
 } from 'vue';
 
 import useNumberMap, { type NumberMap } from '@/composables/useNumberMap';
+import { getObjectEntries } from '@/utils/getObjectEntries';
 
 import useHappinessStore from './happiness';
+import useLabourStore from './labour';
 import useResources, { type ResourceKey } from './resources';
 
 export const jobKeys = ['farmers', 'merchants', 'builders'] as const;
@@ -26,6 +28,7 @@ const useTypedJobs = <T extends object = { [K in Job]: number }>
 
 const useCitizens = defineStore('citizens', () => {
   const resources = useResources();
+  const labour = useLabourStore();
   const happinessStore = useHappinessStore();
 
   const citizenCount = ref(5);
@@ -88,10 +91,16 @@ const useCitizens = defineStore('citizens', () => {
   watch([idle, idleIncrements.total], () => resources.food.setRevenue('citizens.idle', idle.value * idleIncrements.total.value), { immediate: true });
 
   watchEffect(() => {
-    Object.entries(jobResourceMap).forEach(
+    getObjectEntries(jobResourceMap).forEach(
       ([jobKey, resourceKey]) => {
-        const jobKeyTyped = jobKey as Job;
-        resources[resourceKey].setRevenue(`citizens.${jobKeyTyped}`, jobs[jobKeyTyped] * jobIncrements[jobKeyTyped].total.value);
+        const key = `citizens.${jobKey}`;
+        const value = jobs[jobKey] * jobIncrements[jobKey].total.value;
+
+        if (jobKey === 'builders') {
+          labour.setImpact(key, value);
+        } else {
+          resources[resourceKey].setRevenue(key, value);
+        }
       },
     );
   });

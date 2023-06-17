@@ -1,9 +1,9 @@
 <template>
   <div class="fb-resources">
     <fb-resources-happiness />
+    <fb-resources-labour />
     <fb-resources-item name="food" />
     <fb-resources-item name="gold" />
-    <fb-resources-item name="labour" />
   </div>
 </template>
 

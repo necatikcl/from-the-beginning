@@ -34,7 +34,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 
-import { translate } from '@/locale';
+import { translateArray } from '@/locale';
 import useLaws from '@/stores/laws';
 import type { Law, LawKey } from '@/stores/laws/types';
 
@@ -62,7 +62,7 @@ const colors: { [K in LawKey]: string } = {
 
 const law = computed(() => lawsStore.items.find((l) => l.key === props.lawKey) as Law);
 
-const features = computed(() => translate(`laws.${props.lawKey}.features`));
+const features = computed(() => translateArray(`laws.${props.lawKey}.features`));
 </script>
 
 <style lang="scss" scoped>

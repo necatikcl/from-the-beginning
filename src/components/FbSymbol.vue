@@ -14,19 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import type { ResourceKey } from '@/stores/resources';
-
-export interface Props {
-  name: ResourceKey
-}
-
-defineProps<Props>();
-
-type Data = {
-  [key in ResourceKey]: { icon: string, color: string }
-};
-
-const data: Data = {
+const data = {
   food: {
     icon: 'wheat-awn',
     color: 'cyan',
@@ -39,7 +27,17 @@ const data: Data = {
     icon: 'screwdriver-wrench',
     color: 'indigo',
   },
-};
+} as const;
+
+type Data = typeof data;
+
+export type ColoredIconName = keyof Data;
+
+export interface Props {
+  name: ColoredIconName
+}
+
+defineProps<Props>();
 </script>
 
 <style lang="scss" scoped>

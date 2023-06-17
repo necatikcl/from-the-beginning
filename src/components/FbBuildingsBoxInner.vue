@@ -13,13 +13,13 @@
       {{ title }}
     </div>
     <div class="fb-buildings-box-description">
-      <fb-resource-icon
+      <fb-symbol
         v-for="value, key in building.revenue"
         :key="key"
         :name="key"
       >
         {{ formatRevenue(value) }}
-      </fb-resource-icon>
+      </fb-symbol>
     </div>
 
     <div
@@ -59,6 +59,7 @@ import { computed } from 'vue';
 
 import type { Building } from '@/config/buildings';
 import useBuildings from '@/stores/buildings';
+import useLabourStore from '@/stores/labour';
 import useResources from '@/stores/resources';
 import formatMs from '@/utils/formatMs';
 
@@ -71,6 +72,7 @@ export interface Props {
 const props = defineProps<Props>();
 const buildings = useBuildings();
 const resources = useResources();
+const labour = useLabourStore();
 
 const buildable = computed(() => buildings.canBuild(props.building.key));
 const affordable = computed(() => buildings.canAfford(props.building.key));
@@ -90,14 +92,14 @@ const processProgress = computed(
 );
 
 const processRemainingTime = computed(() => {
-  const remainingTicks = labourRemaining.value / resources.labour.revenuePerSecond;
+  const remainingTicks = labourRemaining.value / labour.value;
 
   return formatMs(remainingTicks * 1000);
 });
 
 const processRemaining = computed(() => {
-  if (paused.value) return 'Paused';
-  if (resources.labour.revenuePerSecond === 0) return 'No labour';
+  if (paused.value) return translate('paused');
+  if (labour.value === 0) return translate('labour.emptyShort');
 
   return processRemainingTime.value;
 });

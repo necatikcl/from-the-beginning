@@ -5,7 +5,7 @@
   >
     <div class="fb-resources-item">
       <div class="fb-resources-item-icon">
-        <fb-resource-icon :name="props.name" />
+        <fb-symbol :name="name" />
       </div>
       <div class="fb-resources-item-value">
         {{ formatNumber(resource.value, 'compact') }}
@@ -30,7 +30,6 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 
-import type { Building } from '@/config/buildings';
 import { MessageKey, translate } from '@/locale';
 import type { ResourceKey } from '@/stores/resources';
 import useResources from '@/stores/resources';
@@ -55,19 +54,9 @@ type DataItem = {
 } & Item
 
 const data = computed<DataItem[]>(() => {
-  let buildingStatus = null;
-  // @ts-ignore
   const revenuesEntries = Object.entries(resource.value.revenues) as [MessageKey, number][];
 
   const revenues = revenuesEntries.flatMap(([key, value]): DataItem[] | DataItem | boolean => {
-    if (props.name === 'labour' && value === 0) {
-      buildingStatus = {
-        label: `<b>${translate('building')}:</b> ${translate(`buildings.${key as Building['key']}`)}`,
-      };
-
-      return false;
-    }
-
     const { text, type } = weightNumber(value);
 
     const item = {
@@ -98,12 +87,6 @@ const data = computed<DataItem[]>(() => {
       seperator: true,
     },
     ...revenues,
-    ...(
-      buildingStatus ? [
-        { seperator: true },
-        buildingStatus,
-      ] : []
-    ),
     ...(resource.value.revenuePerSecond > 0 ? [
       { seperator: true },
       {
@@ -129,6 +112,5 @@ const title = computed(() => translate(`resources.${props.name}`));
     &-value {
       @apply text-base flex items-center justify-between flex-1;
     }
-
   }
 </style>

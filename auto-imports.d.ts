@@ -21,6 +21,7 @@ declare global {
   const formatNumber: typeof import('./src/utils/formatNumber')['default']
   const getCurrentInstance: typeof import('vue')['getCurrentInstance']
   const getCurrentScope: typeof import('vue')['getCurrentScope']
+  const getObjectEntries: typeof import('./src/utils/getObjectEntries')['getObjectEntries']
   const h: typeof import('vue')['h']
   const happiness: typeof import('./src/stores/happiness')['default']
   const inject: typeof import('vue')['inject']
@@ -30,6 +31,7 @@ declare global {
   const isRef: typeof import('vue')['isRef']
   const jobKeys: typeof import('./src/stores/citizens')['jobKeys']
   const jobResourceMap: typeof import('./src/stores/citizens')['jobResourceMap']
+  const labour: typeof import('./src/stores/labour')['default']
   const locale: typeof import('./src/locale/index')['locale']
   const markRaw: typeof import('vue')['markRaw']
   const nextTick: typeof import('vue')['nextTick']
@@ -65,6 +67,7 @@ declare global {
   const toValue: typeof import('vue')['toValue']
   const townHall: typeof import('./src/stores/townHall')['default']
   const translate: typeof import('./src/locale/index')['translate']
+  const translateArray: typeof import('./src/locale/index')['translateArray']
   const triggerRef: typeof import('vue')['triggerRef']
   const unref: typeof import('vue')['unref']
   const useAttrs: typeof import('vue')['useAttrs']
@@ -112,6 +115,7 @@ declare module 'vue' {
     readonly formatNumber: UnwrapRef<typeof import('./src/utils/formatNumber')['default']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
+    readonly getObjectEntries: UnwrapRef<typeof import('./src/utils/getObjectEntries')['getObjectEntries']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
     readonly happiness: UnwrapRef<typeof import('./src/stores/happiness')['default']>
     readonly inject: UnwrapRef<typeof import('vue')['inject']>
@@ -121,6 +125,7 @@ declare module 'vue' {
     readonly isRef: UnwrapRef<typeof import('vue')['isRef']>
     readonly jobKeys: UnwrapRef<typeof import('./src/stores/citizens')['jobKeys']>
     readonly jobResourceMap: UnwrapRef<typeof import('./src/stores/citizens')['jobResourceMap']>
+    readonly labour: UnwrapRef<typeof import('./src/stores/labour')['default']>
     readonly locale: UnwrapRef<typeof import('./src/locale/index')['locale']>
     readonly markRaw: UnwrapRef<typeof import('vue')['markRaw']>
     readonly nextTick: UnwrapRef<typeof import('vue')['nextTick']>
@@ -156,6 +161,7 @@ declare module 'vue' {
     readonly toValue: UnwrapRef<typeof import('vue')['toValue']>
     readonly townHall: UnwrapRef<typeof import('./src/stores/townHall')['default']>
     readonly translate: UnwrapRef<typeof import('./src/locale/index')['translate']>
+    readonly translateArray: UnwrapRef<typeof import('./src/locale/index')['translateArray']>
     readonly triggerRef: UnwrapRef<typeof import('vue')['triggerRef']>
     readonly unref: UnwrapRef<typeof import('vue')['unref']>
     readonly useAttrs: UnwrapRef<typeof import('vue')['useAttrs']>
@@ -192,6 +198,7 @@ declare module '@vue/runtime-core' {
     readonly formatNumber: UnwrapRef<typeof import('./src/utils/formatNumber')['default']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
+    readonly getObjectEntries: UnwrapRef<typeof import('./src/utils/getObjectEntries')['getObjectEntries']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
     readonly happiness: UnwrapRef<typeof import('./src/stores/happiness')['default']>
     readonly inject: UnwrapRef<typeof import('vue')['inject']>
@@ -201,6 +208,7 @@ declare module '@vue/runtime-core' {
     readonly isRef: UnwrapRef<typeof import('vue')['isRef']>
     readonly jobKeys: UnwrapRef<typeof import('./src/stores/citizens')['jobKeys']>
     readonly jobResourceMap: UnwrapRef<typeof import('./src/stores/citizens')['jobResourceMap']>
+    readonly labour: UnwrapRef<typeof import('./src/stores/labour')['default']>
     readonly locale: UnwrapRef<typeof import('./src/locale/index')['locale']>
     readonly markRaw: UnwrapRef<typeof import('vue')['markRaw']>
     readonly nextTick: UnwrapRef<typeof import('vue')['nextTick']>
@@ -236,6 +244,7 @@ declare module '@vue/runtime-core' {
     readonly toValue: UnwrapRef<typeof import('vue')['toValue']>
     readonly townHall: UnwrapRef<typeof import('./src/stores/townHall')['default']>
     readonly translate: UnwrapRef<typeof import('./src/locale/index')['translate']>
+    readonly translateArray: UnwrapRef<typeof import('./src/locale/index')['translateArray']>
     readonly triggerRef: UnwrapRef<typeof import('vue')['triggerRef']>
     readonly unref: UnwrapRef<typeof import('vue')['unref']>
     readonly useAttrs: UnwrapRef<typeof import('vue')['useAttrs']>

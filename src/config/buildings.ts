@@ -3,6 +3,7 @@ import type { ResourceKey } from '../stores/resources';
 interface BuildingsUnstrictKeys {
   key: string,
   requirements: {
+    labour: number,
     level: number,
     resources: {
       [key in ResourceKey]?: number
@@ -20,11 +21,11 @@ const BUILDINGS = [
   {
     key: 'granary',
     requirements: {
+      labour: 100,
       level: 1,
       resources: {
         food: 200,
         gold: 10,
-        labour: 100,
       },
     },
     revenue: {
@@ -38,11 +39,11 @@ const BUILDINGS = [
   {
     key: 'copperMine',
     requirements: {
+      labour: 170,
       level: 2,
       resources: {
         food: 250,
         gold: 100,
-        labour: 170,
       },
     },
     revenue: {

@@ -1,7 +1,7 @@
 <template>
   <div class="fb-jobs-box">
     <div class="fb-jobs-box-icon">
-      <fb-resource-icon
+      <fb-symbol
         v-if="resourceKey"
         :name="resourceKey"
       />

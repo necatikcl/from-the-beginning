@@ -88,6 +88,9 @@
     "useResources": true,
     "useTownHall": true,
     "weightNumber": true,
-    "fixNumber": true
+    "fixNumber": true,
+    "labour": true,
+    "translateArray": true,
+    "getObjectEntries": true
   }
 }

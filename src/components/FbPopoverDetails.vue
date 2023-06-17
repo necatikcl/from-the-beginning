@@ -25,15 +25,15 @@
             v-if="!item.seperator && item.label"
             class="fb-popover-item-label"
           >
-            <fb-resource-icon
-              v-if="item.resourceKey"
-              :name="item.resourceKey"
+            <fb-symbol
+              v-if="item.resourceKey || item.icon"
+              :name="item.resourceKey || item.icon"
             >
               <span v-html="item.label" />
-            </fb-resource-icon>
+            </fb-symbol>
             <fb-town-hall-image v-if="item.townHall" />
             <span
-              v-if="!item.resourceKey"
+              v-if="!item.resourceKey && !item.icon"
               v-html="item.label"
             />
           </div>
@@ -55,12 +55,15 @@ import { ref } from 'vue';
 
 import type { ResourceKey } from '@/stores/resources';
 
+import { ColoredIconName } from './FbSymbol.vue';
+
 export interface Item {
   seperator?: boolean,
   label?: string,
   value?: number | string,
   type?: 'danger' | 'success' | 'secondary',
   resourceKey?: ResourceKey,
+  icon?: ColoredIconName,
   townHall?: boolean
 }
 

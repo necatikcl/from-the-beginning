@@ -4,6 +4,7 @@ import { ref, computed, watch } from 'vue';
 import useNumberMap from '@/composables/useNumberMap';
 
 import type { Building } from '../../config/buildings';
+import useLabourStore from '../labour';
 import useResources, { type ResourceKey } from '../resources';
 import useTownHall from '../townHall';
 
@@ -22,6 +23,7 @@ const useBuildings = defineStore('buildings', () => {
 
   const townHall = useTownHall();
   const resources = useResources();
+  const labour = useLabourStore();
   const availableBuildings = useAvailableBuildings(owned);
 
   const buildingOutputMultiplier = useNumberMap({ base: 1 });
@@ -47,6 +49,7 @@ const useBuildings = defineStore('buildings', () => {
 
     return townHall.level >= (building.requirements.level || 0);
   };
+
   const getBuildingLabourRemaining = (key: Building['key']) => {
     const progress = labourProgresses[key];
     const total = getBuildingLabourRequirement(key) as number;
@@ -105,13 +108,10 @@ const useBuildings = defineStore('buildings', () => {
 
   const labourTickFn = (key: Building['key']) => () => {
     const totalRequirement = getBuildingLabourRequirement(key) as number;
-    const remaining = getBuildingLabourRemaining(key);
 
-    const addition = Math.min(remaining, resources.labour.value);
     const labourProgress = labourProgresses[key] as LabourProgress;
 
-    labourProgress.value += addition;
-    resources.labour.value -= addition;
+    labourProgress.value += labour.value;
 
     if (labourProgress.value >= totalRequirement) {
       resources.removeTickListener(labourProgress.tickHook);
@@ -141,7 +141,6 @@ const useBuildings = defineStore('buildings', () => {
 
     activeLabour.value = key;
     resources.addTickListener(labourProgress.tickHook);
-    resources.labour.setRevenue(key, 0, true);
 
     labourProgresses[key] ||= labourProgress;
   };
@@ -153,7 +152,6 @@ const useBuildings = defineStore('buildings', () => {
 
     activeLabour.value = undefined;
     resources.removeTickListener(tickHook);
-    resources.labour.deleteRevenue(key);
   };
 
   const buildingsOwned = computed(

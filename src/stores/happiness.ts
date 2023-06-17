@@ -3,12 +3,14 @@ import { computed, watchEffect } from 'vue';
 
 import useNumberMap from '@/composables/useNumberMap';
 
+import useLabourStore from './labour';
 import useResources, { resourceKeys } from './resources';
 
 export const BASE_HAPPINESS = 100;
 
 const useHappinessStore = defineStore('happiness', () => {
   const resources = useResources();
+  const labour = useLabourStore();
 
   const {
     data: happinessImpacts,
@@ -38,6 +40,13 @@ const useHappinessStore = defineStore('happiness', () => {
 
       resource.setRevenue('resources.happiness', revenuePerSecond * revenuePercentage);
     });
+
+    const revenuePerSecond = labour.getFilteredImpacts(
+      'resources.happiness',
+      (value) => value > 0,
+    );
+
+    labour.setImpact('resources.happiness', revenuePerSecond * revenuePercentage);
   });
 
   return {

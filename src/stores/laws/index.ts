@@ -11,6 +11,7 @@ import increasePopulationPenalty from './articles/increasePopulationPenalty';
 import increaseResourceProduction from './articles/increaseResourceProduction';
 import setHappinesBasedIdle from './articles/setHappinesBasedIdle';
 import setHappinessImpact from './articles/setHappinessImpact';
+import setLabourImpact from './articles/setLabourImpact';
 import createLaw from './utils';
 
 const diligence = createLaw('diligence', (props) => {
@@ -75,15 +76,9 @@ const land = createLaw('land', (props) => {
 const urbanization = createLaw('urbanization', (props) => {
   const citizens = useCitizens();
 
-  increaseResourceProduction({
+  setLabourImpact({
     ...props,
     multiplier: 2,
-    resourcesToInclude: ['labour'],
-  });
-
-  setHappinessImpact({
-    ...props,
-    value: () => citizens.jobs.farmers * -3,
   });
 
   setHappinessImpact({

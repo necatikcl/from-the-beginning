@@ -59,9 +59,9 @@ const data = computed<Item[]>(() => {
       seperator: true,
     },
     {
-      resourceKey: 'labour',
+      icon: 'labour',
       label: translate('resources.labour'),
-      value: props.building.requirements.resources.labour,
+      value: props.building.requirements.labour,
     },
     {
       seperator: true,

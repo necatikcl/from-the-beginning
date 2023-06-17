@@ -36,7 +36,6 @@ module.exports = {
     'no-case-declarations': 'off',
     'no-console': 'off',
     'no-unused-vars': 'off',
-    'no-param-reassign': 'off',
     'unused-imports/no-unused-imports': 'error',
     'unused-imports/no-unused-vars': 'off',
     'import/prefer-default-export': 'off',

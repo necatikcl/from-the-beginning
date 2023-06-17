@@ -45,7 +45,6 @@ export const getBuildingResourceRequirements = (key: Building['key']) => {
 
   return Object.entries(resourceRequirements) as [ResourceKey, number][];
 };
-
 export const getBuildingRevenue = (key: Building['key']) => {
   const building = getBuildingByKey(key);
 
@@ -57,7 +56,7 @@ export const getBuildingRevenue = (key: Building['key']) => {
 };
 
 export const getBuildingLabourRequirement = (key: Building['key']) => getBuildingByKey(key)
-  ?.requirements.resources.labour;
+  ?.requirements.labour;
 
 export const useAvailableBuildings = (owned: Ref<Building['key'][]>) => computed(
   () => BUILDINGS.filter((item) => !owned.value.includes(item.key)),

@@ -13,10 +13,22 @@ const messages: { [K in Language]: Messages } = {
 
 export const locale = ref<Language>('en');
 
-export const translate = (key: MessageKey, n?: unknown): MessageValue => {
+export const translate = (key: MessageKey, n?: unknown): string => {
   const message = messages[locale.value][key];
 
-  if (!n || Array.isArray(message)) return message;
+  if (Array.isArray(message)) {
+    return key;
+  }
+
+  if (!n) return message;
 
   return message.replace('{n}', String(n));
+};
+
+export const translateArray = (key: MessageKey): string[] => {
+  const message = messages[locale.value][key];
+
+  if (!Array.isArray(message)) return [key];
+
+  return message;
 };

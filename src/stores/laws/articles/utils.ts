@@ -1,6 +1,6 @@
 type IncrementOrMultiplyProps = {
   active: boolean,
-  increment: number,
+  increment?: number,
   multiplier: number,
   currentValue: () => number,
 };
