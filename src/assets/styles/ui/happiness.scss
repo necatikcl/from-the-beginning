@@ -1,0 +1,29 @@
+.happiness {
+  &-100 {
+    @apply border-green-600 text-green-600;
+  }
+
+  &-90 {
+    @apply border-lime-600 text-lime-600;
+  }
+
+  &-80 {
+    @apply border-cyan-600 text-cyan-600;
+  }
+
+  &-75 {
+    @apply border-amber-600 text-amber-600;
+  }
+
+  &-50 {
+    @apply border-orange-600 text-orange-600;
+  }
+
+  &-25 {
+    @apply border-pink-600 text-pink-600;
+  }
+
+  &-0 {
+    @apply border-red-600 text-red-600;
+  }
+}

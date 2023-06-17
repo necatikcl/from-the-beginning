@@ -57,6 +57,7 @@ const data = computed(() => {
     }
 
     items.push({
+      icon: key === 'resources.happiness' ? 'happiness' : undefined,
       label: translate(key),
       type,
       value: text,

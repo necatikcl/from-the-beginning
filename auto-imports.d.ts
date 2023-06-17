@@ -61,6 +61,7 @@ declare global {
   const shallowReactive: typeof import('vue')['shallowReactive']
   const shallowReadonly: typeof import('vue')['shallowReadonly']
   const shallowRef: typeof import('vue')['shallowRef']
+  const storage: typeof import('./src/utils/storage')['default']
   const toRaw: typeof import('vue')['toRaw']
   const toRef: typeof import('vue')['toRef']
   const toRefs: typeof import('vue')['toRefs']
@@ -100,7 +101,6 @@ declare global {
 import { UnwrapRef } from 'vue'
 declare module 'vue' {
   interface ComponentCustomProperties {
-    readonly BASE_HAPPINESS: UnwrapRef<typeof import('./src/stores/happiness')['BASE_HAPPINESS']>
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
     readonly citizens: UnwrapRef<typeof import('./src/stores/citizens')['default']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
@@ -117,7 +117,6 @@ declare module 'vue' {
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
     readonly getObjectEntries: UnwrapRef<typeof import('./src/utils/getObjectEntries')['getObjectEntries']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
-    readonly happiness: UnwrapRef<typeof import('./src/stores/happiness')['default']>
     readonly inject: UnwrapRef<typeof import('vue')['inject']>
     readonly isProxy: UnwrapRef<typeof import('vue')['isProxy']>
     readonly isReactive: UnwrapRef<typeof import('vue')['isReactive']>
@@ -155,6 +154,7 @@ declare module 'vue' {
     readonly shallowReactive: UnwrapRef<typeof import('vue')['shallowReactive']>
     readonly shallowReadonly: UnwrapRef<typeof import('vue')['shallowReadonly']>
     readonly shallowRef: UnwrapRef<typeof import('vue')['shallowRef']>
+    readonly storage: UnwrapRef<typeof import('./src/utils/storage')['default']>
     readonly toRaw: UnwrapRef<typeof import('vue')['toRaw']>
     readonly toRef: UnwrapRef<typeof import('vue')['toRef']>
     readonly toRefs: UnwrapRef<typeof import('vue')['toRefs']>
@@ -183,7 +183,6 @@ declare module 'vue' {
 }
 declare module '@vue/runtime-core' {
   interface ComponentCustomProperties {
-    readonly BASE_HAPPINESS: UnwrapRef<typeof import('./src/stores/happiness')['BASE_HAPPINESS']>
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
     readonly citizens: UnwrapRef<typeof import('./src/stores/citizens')['default']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
@@ -200,7 +199,6 @@ declare module '@vue/runtime-core' {
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
     readonly getObjectEntries: UnwrapRef<typeof import('./src/utils/getObjectEntries')['getObjectEntries']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
-    readonly happiness: UnwrapRef<typeof import('./src/stores/happiness')['default']>
     readonly inject: UnwrapRef<typeof import('vue')['inject']>
     readonly isProxy: UnwrapRef<typeof import('vue')['isProxy']>
     readonly isReactive: UnwrapRef<typeof import('vue')['isReactive']>
@@ -238,6 +236,7 @@ declare module '@vue/runtime-core' {
     readonly shallowReactive: UnwrapRef<typeof import('vue')['shallowReactive']>
     readonly shallowReadonly: UnwrapRef<typeof import('vue')['shallowReadonly']>
     readonly shallowRef: UnwrapRef<typeof import('vue')['shallowRef']>
+    readonly storage: UnwrapRef<typeof import('./src/utils/storage')['default']>
     readonly toRaw: UnwrapRef<typeof import('vue')['toRaw']>
     readonly toRef: UnwrapRef<typeof import('vue')['toRef']>
     readonly toRefs: UnwrapRef<typeof import('vue')['toRefs']>

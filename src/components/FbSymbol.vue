@@ -1,12 +1,15 @@
 <template>
   <div
-    class="fb-resource-icon"
-    :class="`fb-resource-icon-${data[name].color}`"
+    class="fb-symbol"
+    :class="{
+      [`fb-symbol-${data[name].color}`]: name !== 'happiness',
+      [`happiness-${currentHappinessRange.value}`]: name === 'happiness',
+    }"
   >
-    <fb-icon :icon="data[name].icon" />
+    <fb-icon :icon="icon" />
     <div
       v-if="$slots.default"
-      class="fb-resource-icon-text"
+      class="fb-symbol-text"
     >
       <slot />
     </div>
@@ -14,6 +17,8 @@
 </template>
 
 <script setup lang="ts">
+import { useHappinessRange } from '@/stores/happiness/composables';
+
 const data = {
   food: {
     icon: 'wheat-awn',
@@ -27,6 +32,10 @@ const data = {
     icon: 'screwdriver-wrench',
     color: 'indigo',
   },
+  happiness: {
+    icon: '',
+    color: 'green',
+  },
 } as const;
 
 type Data = typeof data;
@@ -37,11 +46,21 @@ export interface Props {
   name: ColoredIconName
 }
 
-defineProps<Props>();
+const props = defineProps<Props>();
+
+const currentHappinessRange = useHappinessRange();
+
+const icon = computed(() => {
+  if (props.name === 'happiness') {
+    return currentHappinessRange.value.icon;
+  }
+
+  return data[props.name].icon;
+});
 </script>
 
 <style lang="scss" scoped>
-  .fb-resource-icon {
+  .fb-symbol {
     @apply flex items-center;
 
     &-text {

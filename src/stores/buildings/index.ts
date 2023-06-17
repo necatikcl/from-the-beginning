@@ -140,6 +140,10 @@ const useBuildings = defineStore('buildings', () => {
       tickHook: labourTickFn(key),
     };
 
+    if (!labourProgress.tickHook) {
+      labourProgress.tickHook = labourTickFn(key);
+    }
+
     activeLabour.value = key;
     resources.addTickListener(labourProgress.tickHook);
 
@@ -158,6 +162,14 @@ const useBuildings = defineStore('buildings', () => {
   const buildingsOwned = computed(
     () => owned.value.map(getBuildingByKey).filter(Boolean) as Building[],
   );
+
+  if (activeLabour.value) {
+    const { tickHook } = labourProgresses[activeLabour.value] as LabourProgress;
+
+    resources.removeTickListener(tickHook);
+
+    startBuilding(activeLabour.value);
+  }
 
   return {
     buildingOutputMultiplier,

@@ -42,7 +42,7 @@ import router from './router';
 
 import 'virtual:windi.css';
 
-import './assets/main.css';
+import './assets/styles/main.scss';
 
 library.add(
   faTractor,

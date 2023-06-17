@@ -3,8 +3,8 @@ import { computed, watchEffect } from 'vue';
 
 import useNumberMap from '@/composables/useNumberMap';
 
-import useLabourStore from './labour';
-import useResources, { resourceKeys } from './resources';
+import useLabourStore from '../labour';
+import useResources, { resourceKeys } from '../resources';
 
 export const BASE_HAPPINESS = 100;
 

@@ -91,6 +91,7 @@
     "fixNumber": true,
     "labour": true,
     "translateArray": true,
-    "getObjectEntries": true
+    "getObjectEntries": true,
+    "storage": true
   }
 }
