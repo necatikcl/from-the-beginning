@@ -16,7 +16,7 @@ type JobList = typeof jobKeys;
 export type Job = JobList[number];
 
 export const jobResourceMap: {
-  [K in Job]: ResourceKey;
+  [K in Job]: ResourceKey | 'labour';
 } = {
   farmers: 'food',
   merchants: 'gold',
@@ -99,7 +99,7 @@ const useCitizens = defineStore('citizens', () => {
         if (jobKey === 'builders') {
           labour.setImpact(key, value);
         } else {
-          resources[resourceKey].setRevenue(key, value);
+          resources[resourceKey as ResourceKey].setRevenue(key, value);
         }
       },
     );
