@@ -3,8 +3,6 @@
     <fb-resources-happiness />
     <fb-resources-item name="food" />
     <fb-resources-item name="gold" />
-    <fb-resources-item name="wood" />
-    <fb-resources-item name="iron" />
     <fb-resources-item name="labour" />
   </div>
 </template>

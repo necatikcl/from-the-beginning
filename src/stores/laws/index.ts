@@ -1,7 +1,5 @@
 import { defineStore } from 'pinia';
 
-import useResources from '@/stores/resources';
-
 import useCitizens, { jobKeys } from '../citizens';
 
 import increaseBuildingProductions from './articles/increaseBuildingProductions';
@@ -62,38 +60,15 @@ const happiness = createLaw('happiness', (props) => {
 });
 
 const land = createLaw('land', (props) => {
-  const resources = useResources();
-  const citizens = useCitizens();
-
   increaseJobProduction({
     ...props,
     multiplier: 2,
     jobsToInclude: ['farmers'],
   });
 
-  increaseJobProduction({
+  increaseBuildingProductions({
     ...props,
-    multiplier: 0.5,
-    jobsToInclude: ['lumberjacks'],
-    condition: () => resources.wood.value > resources.wood.capacity / 2,
-  });
-
-  increaseJobProduction({
-    ...props,
-    multiplier: 2,
-    jobsToInclude: ['lumberjacks'],
-    condition: () => resources.wood.value < resources.wood.capacity / 2,
-  });
-
-  setHappinessImpact({
-    ...props,
-    value: () => {
-      const fromFarmers = citizens.jobs.farmers * 0.2;
-
-      if (citizens.jobs.lumberjacks > citizens.jobs.farmers) return fromFarmers - 20;
-
-      return fromFarmers;
-    },
+    additionalProduction: -0.5,
   });
 });
 

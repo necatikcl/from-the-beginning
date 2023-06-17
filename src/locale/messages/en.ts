@@ -4,8 +4,6 @@ const en = {
   'citizens.idle': 'Idle citizens',
   'citizens.farmers': 'Farmers',
   'citizens.merchants': 'Merchants',
-  'citizens.lumberjacks': 'Lumberjacks',
-  'citizens.miners': 'Miners',
   'citizens.builders': 'Builders',
 
   building: 'Building',
@@ -18,8 +16,6 @@ const en = {
   'resources.happiness': 'Happiness',
   'resources.food': 'Food',
   'resources.gold': 'Gold',
-  'resources.wood': 'Wood',
-  'resources.iron': 'Iron',
   'resources.labour': 'Labour',
   'resources.capacity': 'Capacity',
 
@@ -52,10 +48,10 @@ const en = {
     '-2 happiness per idle citizen',
   ],
 
-  'laws.land': 'Land Law',
+  'laws.land': 'Nature Law',
   'laws.land.features': [
     'Farmers produce 2x food and 0.2 happiness',
-    'Wood production is halved when wood stocks exceeds the half of its capacity, doubled otherwise',
+    'Halves all buildings production',
     'Happiness -20 when lumberjack count exceeds farmer count.',
   ],
 

@@ -8,7 +8,7 @@ import useNumberMap, { type NumberMap } from '@/composables/useNumberMap';
 import useHappinessStore from './happiness';
 import useResources, { type ResourceKey } from './resources';
 
-export const jobKeys = ['farmers', 'merchants', 'lumberjacks', 'miners', 'builders'] as const;
+export const jobKeys = ['farmers', 'merchants', 'builders'] as const;
 
 type JobList = typeof jobKeys;
 export type Job = JobList[number];
@@ -18,8 +18,6 @@ export const jobResourceMap: {
 } = {
   farmers: 'food',
   merchants: 'gold',
-  lumberjacks: 'wood',
-  miners: 'iron',
   builders: 'labour',
 } as const;
 
@@ -35,16 +33,12 @@ const useCitizens = defineStore('citizens', () => {
   const jobs = useTypedJobs({
     farmers: 0,
     merchants: 0,
-    lumberjacks: 0,
-    miners: 0,
     builders: 0,
   });
 
   const jobIncrements: { [key in Job]: NumberMap } = {
     farmers: useNumberMap({ base: 2 }),
     merchants: useNumberMap({ base: 1 }),
-    lumberjacks: useNumberMap({ base: 0.4 }),
-    miners: useNumberMap({ base: 0.1 }),
     builders: useNumberMap({ base: 1 }),
   } as const;
 

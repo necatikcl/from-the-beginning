@@ -15,14 +15,6 @@
         job-key="merchants"
       />
       <fb-jobs-box
-        resource-key="wood"
-        job-key="lumberjacks"
-      />
-      <fb-jobs-box
-        resource-key="iron"
-        job-key="miners"
-      />
-      <fb-jobs-box
         resource-key="labour"
         job-key="builders"
       />

@@ -23,7 +23,6 @@ const BUILDINGS = [
       level: 1,
       resources: {
         food: 200,
-        wood: 20,
         gold: 10,
         labour: 100,
       },
@@ -42,15 +41,12 @@ const BUILDINGS = [
       level: 2,
       resources: {
         food: 250,
-        wood: 10,
         gold: 100,
         labour: 170,
-        iron: 15,
       },
     },
     revenue: {
       gold: 5,
-      iron: -0.05,
     },
   },
 ] as const;

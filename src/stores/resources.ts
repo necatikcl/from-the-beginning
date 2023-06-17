@@ -6,8 +6,6 @@ import useNumberMap from '@/composables/useNumberMap';
 const INITIAL_RESOURCES = {
   food: 250,
   gold: 100,
-  wood: 50,
-  iron: 5,
   labour: 100,
 } as const;
 
@@ -66,11 +64,9 @@ export type TickListener = () => void;
 const useResources = defineStore('resources', () => {
   const food = resourceHandler('food');
   const gold = resourceHandler('gold');
-  const wood = resourceHandler('wood');
-  const iron = resourceHandler('iron');
   const labour = resourceHandler('labour');
 
-  const ALL_RESOURCES = [food, gold, wood, iron, labour];
+  const ALL_RESOURCES = [food, gold, labour];
 
   const tickHooks: TickListener[] = [];
 
@@ -93,8 +89,6 @@ const useResources = defineStore('resources', () => {
   return {
     food,
     gold,
-    wood,
-    iron,
     labour,
     tick,
     addTickListener,

@@ -35,14 +35,6 @@ const data: Data = {
     icon: 'coins',
     color: 'yellow',
   },
-  wood: {
-    icon: 'tree',
-    color: 'green',
-  },
-  iron: {
-    icon: 'mountain',
-    color: 'pink',
-  },
   labour: {
     icon: 'screwdriver-wrench',
     color: 'indigo',
