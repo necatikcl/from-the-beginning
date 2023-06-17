@@ -4,7 +4,7 @@ import en from './messages/en';
 import type { Messages } from './messages/en';
 
 type Language = 'en';
-type MessageKey = keyof Messages;
+export type MessageKey = keyof Messages;
 type MessageValue = Messages[MessageKey];
 
 const messages: { [K in Language]: Messages } = {

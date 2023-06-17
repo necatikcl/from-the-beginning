@@ -39,6 +39,7 @@ module.exports = {
     'no-param-reassign': 'off',
     'unused-imports/no-unused-imports': 'error',
     'unused-imports/no-unused-vars': 'off',
+    'import/prefer-default-export': 'off',
     'import/no-extraneous-dependencies': 'off',
     'import/no-unresolved': 'off',
     'import/extensions': 'off',

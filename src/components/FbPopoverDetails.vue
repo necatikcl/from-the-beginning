@@ -6,7 +6,7 @@
   >
     <slot />
     <div
-      v-if="hover"
+      v-show="hover"
       class="fb-popover-content"
     >
       <div class="fb-popover-title">
