@@ -2,31 +2,41 @@
   <div class="fb-tabs">
     <div class="fb-tabs-buttons">
       <button
+        v-for="item in items"
+        :key="item.key"
         type="button"
         class="fb-tabs-button"
         :class="{
           'fb-tabs-button-active': activeTab === item.key,
         }"
-        v-for="item in items"
-        :key="item.key"
         @click="activeTab = item.key"
       >
         {{ translate(`tabs.${item.key}`) }}
       </button>
     </div>
     <div class="fb-tabs-content">
-      <div class="fb-tabs-content-title" v-if="activeTabComponent">
+      <div
+        v-if="activeTabComponent"
+        class="fb-tabs-content-title"
+      >
         {{ translate(`tabs.${activeTab}`) }}
       </div>
       <keep-alive>
         <component :is="activeTabComponent" />
       </keep-alive>
-      <div class="fb-tabs-empty" v-if="!activeTabComponent">
+      <div
+        v-if="!activeTabComponent"
+        class="fb-tabs-empty"
+      >
         <div class="fb-tabs-empty-icon">
           <fb-icon icon="charging-station" />
         </div>
-        <div class="fb-tabs-empty-title">Coming soon</div>
-        <div class="fb-tabs-empty-description">Sorry, but I am still working on this :C</div>
+        <div class="fb-tabs-empty-title">
+          Coming soon
+        </div>
+        <div class="fb-tabs-empty-description">
+          Sorry, but I am still working on this :C
+        </div>
       </div>
     </div>
   </div>
@@ -34,8 +44,6 @@
 
 <script setup lang="ts">
 import { computed, ref, type Component } from 'vue';
-
-import { translate } from '@/locale';
 
 export interface Item {
   key: 'jobs' | 'buildings' | 'laws' | 'science' | 'religion';

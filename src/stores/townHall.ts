@@ -1,12 +1,15 @@
+import { defineStore } from 'pinia';
 import {
   ref, watch, computed,
 } from 'vue';
-import { defineStore } from 'pinia';
-import useCitizens from '@/stores/citizens';
+
 import useNumberMap from '@/composables/useNumberMap';
+import useCitizens from '@/stores/citizens';
+
 import useConfig from '../config/townHall';
-import useResources, { resourceKeys } from './resources';
+
 import useHappinessStore from './happiness';
+import useResources, { resourceKeys } from './resources';
 
 const BASE_CITIZEN_INTERVAL = 60000;
 

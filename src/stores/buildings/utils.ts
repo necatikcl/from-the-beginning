@@ -2,8 +2,8 @@ import {
   computed, reactive, ref,
 } from 'vue';
 import type { Ref } from 'vue';
-import BUILDINGS, { type Building } from '../../config/buildings';
 
+import BUILDINGS, { type Building } from '../../config/buildings';
 import type { ResourceKey, TickListener } from '../resources';
 
 export interface LabourProgress {

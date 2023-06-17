@@ -1,11 +1,3 @@
-<style lang="scss" scoped>
-.fb-jobs {
-  &-grid {
-    @apply grid grid-cols-6 gap-4;
-  }
-}
-</style>
-
 <template>
   <div class="fb-jobs">
     <div class="fb-jobs-grid">
@@ -40,8 +32,14 @@
 
 <script setup lang="ts">
 import useCitizens from '@/stores/citizens';
-import { translate } from '@/locale';
-import FbJobsBox from './FbJobsBox.vue';
 
 const citizens = useCitizens();
 </script>
+
+<style lang="scss" scoped>
+.fb-jobs {
+  &-grid {
+    @apply grid grid-cols-6 gap-4;
+  }
+}
+</style>

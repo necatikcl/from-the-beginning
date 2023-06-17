@@ -1,5 +1,7 @@
-import useHappinessStore from '@/stores/happiness';
 import { watchEffect } from 'vue';
+
+import useHappinessStore from '@/stores/happiness';
+
 import type { LawArticle } from '../types';
 
 interface Props extends LawArticle {

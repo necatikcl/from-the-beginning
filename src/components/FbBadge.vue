@@ -1,3 +1,24 @@
+<template>
+  <span
+    class="fb-badge"
+    :class="{
+      [`fb-badge-${type}`]: type,
+      [`fb-badge-${size}`]: size,
+    }"
+  >
+    <slot />
+  </span>
+</template>
+
+<script setup lang="ts">
+export interface Props {
+  type?: 'danger' | 'success' | 'secondary',
+  size?: 'sm'
+}
+
+defineProps<Props>();
+</script>
+
 <style lang="scss" scoped>
 .fb-badge {
   @apply text-sm uppercase py-1 px-2 rounded-full;
@@ -19,23 +40,3 @@
   }
 }
 </style>
-
-<template>
-  <span
-    class="fb-badge"
-    :class="{
-      [`fb-badge-${type}`]: type,
-      [`fb-badge-${size}`]: size,
-    }">
-    <slot />
-  </span>
-</template>
-
-<script setup lang="ts">
-export interface Props {
-  type?: 'danger' | 'success' | 'secondary',
-  size?: 'sm'
-}
-
-defineProps<Props>();
-</script>

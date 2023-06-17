@@ -4,7 +4,12 @@
     :class="`fb-resource-icon-${data[name].color}`"
   >
     <fb-icon :icon="data[name].icon" />
-    <div class="fb-resource-icon-text" v-if="$slots.default"> <slot /></div>
+    <div
+      v-if="$slots.default"
+      class="fb-resource-icon-text"
+    >
+      <slot />
+    </div>
   </div>
 </template>
 

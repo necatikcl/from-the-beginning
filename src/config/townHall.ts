@@ -1,4 +1,5 @@
 import createConfig from '@/utils/createConfig';
+
 import type { ResourceKey } from '../stores/resources';
 
 interface Level {

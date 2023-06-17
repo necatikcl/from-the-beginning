@@ -1,52 +1,3 @@
-<style lang="scss" scoped>
-  .fb-buildings-box {
-    @apply w-full relative p-4 rounded-lg border border-gray-200 not-disabled:hover:bg-gray-100 transition-colors flex flex-col;
-
-    &:not(&-buildable) {
-      @apply filter grayscale pointer-events-none;
-    }
-
-    &-title {
-      @apply text-lg;
-    }
-
-    &-lock {
-      @apply absolute bottom-2 right-2 bg-gray-300 text-gray-700 w-6 h-6 rounded-full;
-    }
-
-    &-owned {
-      @apply pointer-events-none;
-    }
-
-    &-description {
-      @apply flex flex-wrap;
-
-      & > * {
-        @apply mr-2;
-
-        &:not(:last-child)::after {
-          content: ',';
-          color: black;
-        }
-      }
-
-    }
-
-    &-progress {
-      @apply absolute top-2 right-2 w-1 rounded-3xl bg-gray-300;
-      height: calc(100% - 1rem);
-
-      &-bar {
-        @apply absolute bottom-0 right-0 w-full rounded-3xl bg-gray-500;
-      }
-
-      &-remaining {
-        @apply absolute bottom-0 right-3 text-xs text-gray-500 text-right;
-      }
-    }
-  }
-</style>
-
 <template>
   <button
     type="button"
@@ -58,22 +9,37 @@
     :disabled="!onProgress && !affordable"
     @click="handleClick"
   >
-    <div class="fb-buildings-box-title">{{ title }}</div>
+    <div class="fb-buildings-box-title">
+      {{ title }}
+    </div>
     <div class="fb-buildings-box-description">
-      <fb-resource-icon v-for="value, key in building.revenue" :key="key" :name="key">
+      <fb-resource-icon
+        v-for="value, key in building.revenue"
+        :key="key"
+        :name="key"
+      >
         {{ formatRevenue(value) }}
       </fb-resource-icon>
     </div>
 
-    <div class="fb-buildings-box-lock" v-if="!buildable">
+    <div
+      v-if="!buildable"
+      class="fb-buildings-box-lock"
+    >
       <fb-icon icon="lock" />
     </div>
 
-    <div class="fb-buildings-box-lock" v-else-if="!owned && !affordable && !onProgress">
+    <div
+      v-else-if="!owned && !affordable && !onProgress"
+      class="fb-buildings-box-lock"
+    >
       <fb-icon icon="store-slash" />
     </div>
 
-    <div class="fb-buildings-box-progress" v-if="onProgress">
+    <div
+      v-if="onProgress"
+      class="fb-buildings-box-progress"
+    >
       <div class="fb-buildings-box-progress-remaining">
         <fb-icon :icon="!paused ? 'screwdriver-wrench' : 'pause'" /> <br>
         {{ processRemaining }}
@@ -82,18 +48,19 @@
         class="fb-buildings-box-progress-bar"
         :style="{
           height: `${processProgress}%`,
-        }" />
+        }"
+      />
     </div>
   </button>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import useResources from '@/stores/resources';
-import formatMs from '@/utils/formatMs';
+
 import type { Building } from '@/config/buildings';
 import useBuildings from '@/stores/buildings';
-import FbResourceIcon from './FbResourceIcon.vue';
+import useResources from '@/stores/resources';
+import formatMs from '@/utils/formatMs';
 
 export interface Props {
   building: Building,
@@ -146,6 +113,56 @@ const handleClick = () => {
 const formatRevenue = (value?: number) => {
   if (!value) return value;
   if (value <= 0) return value;
+
   return `+${value}`;
 };
 </script>
+
+<style lang="scss" scoped>
+  .fb-buildings-box {
+    @apply w-full relative p-4 rounded-lg border border-gray-200 not-disabled:hover:bg-gray-100 transition-colors flex flex-col;
+
+    &:not(&-buildable) {
+      @apply filter grayscale pointer-events-none;
+    }
+
+    &-title {
+      @apply text-lg;
+    }
+
+    &-lock {
+      @apply absolute bottom-2 right-2 bg-gray-300 text-gray-700 w-6 h-6 rounded-full;
+    }
+
+    &-owned {
+      @apply pointer-events-none;
+    }
+
+    &-description {
+      @apply flex flex-wrap;
+
+      & > * {
+        @apply mr-2;
+
+        &:not(:last-child)::after {
+          content: ',';
+          color: black;
+        }
+      }
+
+    }
+
+    &-progress {
+      @apply absolute top-2 right-2 w-1 rounded-3xl bg-gray-300;
+      height: calc(100% - 1rem);
+
+      &-bar {
+        @apply absolute bottom-0 right-0 w-full rounded-3xl bg-gray-500;
+      }
+
+      &-remaining {
+        @apply absolute bottom-0 right-3 text-xs text-gray-500 text-right;
+      }
+    }
+  }
+</style>

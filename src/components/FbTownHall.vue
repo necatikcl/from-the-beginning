@@ -1,3 +1,49 @@
+<template>
+  <div class="fb-town-hall">
+    <fb-town-hall-image />
+    <div class="fb-town-hall-content">
+      <div class="fb-town-hall-level">
+        {{ translate("buildings.townHall.level", townHall.level) }}
+        <fb-button
+          type="warning"
+          :disabled="!townHall.upgradeable"
+          @click="townHall.upgrade"
+        >
+          {{ translate("upgrade") }}
+        </fb-button>
+      </div>
+      <div class="fb-town-hall-citizen">
+        <fb-icon icon="user-group" />{{ citizens.count }}
+        - {{ citizenRecruitmentLabel }}
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { computed } from 'vue';
+
+import { translate } from '@/locale';
+import useCitizens from '@/stores/citizens';
+import useTownHall from '@/stores/townHall';
+import formatNumber from '@/utils/formatNumber';
+
+const townHall = useTownHall();
+const citizens = useCitizens();
+
+const nextCitizenSeconds = computed(
+  () => (townHall.citizenIntervalTime - townHall.passedIntervalMs) / 1000,
+);
+
+const citizenRecruitmentLabel = computed(() => {
+  if (townHall.citizensCanBeRecruited) {
+    return translate('buildings.townHall.recruiting', formatNumber(nextCitizenSeconds.value, 'compact'));
+  }
+
+  return 'Max population in this level';
+});
+</script>
+
 <style lang="scss" scoped>
   .fb-town-hall {
     @apply flex items-center bg-gray-100 p-8 rounded-lg;
@@ -27,51 +73,3 @@
     }
   }
 </style>
-
-<template>
-  <div class="fb-town-hall">
-    <fb-town-hall-image />
-    <div class="fb-town-hall-content">
-      <div class="fb-town-hall-level">
-        {{ translate("buildings.townHall.level", townHall.level) }}
-        <fb-button
-          type="warning"
-          :disabled="!townHall.upgradeable"
-          @click="townHall.upgrade"
-        >
-          {{ translate("upgrade") }}
-        </fb-button>
-      </div>
-      <div class="fb-town-hall-citizen">
-        <fb-icon icon="user-group" />{{citizens.count}}
-        - {{ citizenRecruitmentLabel }}
-      </div>
-    </div>
-  </div>
-</template>
-
-<script setup lang="ts">
-import { computed } from 'vue';
-
-import useCitizens from '@/stores/citizens';
-import { translate } from '@/locale';
-import useTownHall from '@/stores/townHall';
-import formatNumber from '@/utils/formatNumber';
-import FbButton from './FbButton.vue';
-import FbTownHallImage from './FbTownHallImage.vue';
-
-const townHall = useTownHall();
-const citizens = useCitizens();
-
-const nextCitizenSeconds = computed(
-  () => (townHall.citizenIntervalTime - townHall.passedIntervalMs) / 1000,
-);
-
-const citizenRecruitmentLabel = computed(() => {
-  if (townHall.citizensCanBeRecruited) {
-    return translate('buildings.townHall.recruiting', formatNumber(nextCitizenSeconds.value, 'compact'));
-  }
-
-  return 'Max population in this level';
-});
-</script>

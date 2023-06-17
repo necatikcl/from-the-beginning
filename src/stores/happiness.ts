@@ -1,6 +1,8 @@
-import { computed, watchEffect } from 'vue';
 import { defineStore } from 'pinia';
+import { computed, watchEffect } from 'vue';
+
 import useNumberMap from '@/composables/useNumberMap';
+
 import useResources, { resourceKeys } from './resources';
 
 export const BASE_HAPPINESS = 100;

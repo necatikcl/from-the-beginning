@@ -1,4 +1,5 @@
 import { ref } from 'vue';
+
 import type { LawArticle, LawKey } from './types';
 
 const createLaw = (key: LawKey, articles: (props: LawArticle) => void) => () => {

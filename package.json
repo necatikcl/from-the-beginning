@@ -19,6 +19,10 @@
     "*.scss": "stylelint -s --config-basedir --fix"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.2.0",
+    "@fortawesome/free-regular-svg-icons": "^6.2.0",
+    "@fortawesome/free-solid-svg-icons": "^6.2.0",
+    "@fortawesome/vue-fontawesome": "^3.0.1",
     "@vueuse/core": "^8.9.4",
     "@vueuse/head": "^0.9.8",
     "@vueuse/integrations": "^8.9.4",
@@ -38,21 +42,24 @@
     "@vue/compiler-sfc": "^3.2.47",
     "@vue/eslint-config-typescript": "^10.0.0",
     "eslint": "^7.32.0",
-    "eslint-plugin-unused-imports": "^2.0.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-config-airbnb-typescript": "^16.2.0",
     "eslint-plugin-import": "^2.27.5",
-    "eslint-plugin-storybook": "^0.6.12",
-    "eslint-plugin-vue": "^7.20.0",
+    "eslint-plugin-unused-imports": "^2.0.0",
+    "eslint-plugin-vue": "^9.14.1",
     "husky": "^7.0.4",
     "lint-staged": "^12.5.0",
     "postcss": "^8.4.4",
     "postcss-scss": "^4.0.2",
+    "postcss-windicss": "^1.0.0",
     "sass": "1.32.13",
     "stylelint": "^14.16.1",
     "stylelint-config-sass-guidelines": "^8.0.0",
     "typescript": "^5.0.4",
+    "unplugin-auto-import": "^0.16.4",
     "unplugin-vue-components": "^0.24.1",
-    "vite": "^4.3.8"
+    "vite": "^4.3.8",
+    "vite-plugin-windicss": "^1.8.8",
+    "windicss": "^3.5.6"
   }
 }

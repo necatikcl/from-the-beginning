@@ -1,11 +1,11 @@
-import { resolve } from 'path';
+import { fileURLToPath, URL } from 'node:url';
 
 import vue from '@vitejs/plugin-vue';
+import AutoImport from 'unplugin-auto-import/vite';
 import UnpluginVueComponents from 'unplugin-vue-components/vite';
 import { defineConfig } from 'vite';
 import Pages from 'vite-plugin-pages';
-
-const Path = (path = '') => resolve(process.cwd(), ...path.split('/').filter(Boolean));
+import WindiCSS from 'vite-plugin-windicss';
 
 export default defineConfig({
   server: {
@@ -26,27 +26,43 @@ export default defineConfig({
       dts: true,
       dirs: ['src/components'],
     }),
-  ],
-  css: {
-    preprocessorOptions: {
-      scss: {
-        additionalData: `
-          @use "/src/assets/styles/variables" as *;
-          @use "/src/assets/styles/mixins" as *;`,
+    WindiCSS(),
+    AutoImport({
+      include: [
+        /\.[tj]sx?$/,
+        /\.vue$/, /\.vue\?vue/,
+        /\.md$/,
+      ],
+      imports: [
+        'vue',
+        'vue-router',
+        {
+          '@vueuse/core': [
+            'useMouse',
+            ['useFetch', 'useMyFetch'],
+          ],
+        },
+        {
+          from: 'vue-router',
+          imports: ['RouteLocationRaw'],
+          type: true,
+        },
+      ],
+      dirs: [
+        './composables',
+        './stores',
+        './utils',
+      ],
+      dts: './auto-imports.d.ts',
+      vueTemplate: true,
+      eslintrc: {
+        enabled: true,
       },
-    },
-  },
+    }),
+  ],
   resolve: {
     alias: {
-      '@api': Path('/src/api'),
-      '@assets': Path('/src/assets'),
-      '@components': Path('/src/components'),
-      '@composables': Path('/src/composables'),
-      '@constants': Path('/src/constants'),
-      '@directives': Path('/src/directives'),
-      '@locale': Path('/src/locale'),
-      '@stores': Path('/src/stores'),
-      '@utils': Path('/src/utils'),
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
 });

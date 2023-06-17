@@ -1,6 +1,9 @@
-import useCitizens from '@/stores/citizens';
 import { watchEffect } from 'vue';
+
+import useCitizens from '@/stores/citizens';
+
 import type { LawArticle } from '../types';
+
 import { incrementOrMultiply, lawsFilterer } from './utils';
 
 interface Props extends LawArticle {

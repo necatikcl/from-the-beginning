@@ -1,5 +1,7 @@
-import useTownHall from '@/stores/townHall';
 import { watchEffect } from 'vue';
+
+import useTownHall from '@/stores/townHall';
+
 import type { LawArticle } from '../types';
 
 interface Props extends LawArticle {

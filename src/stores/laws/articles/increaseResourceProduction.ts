@@ -1,6 +1,9 @@
-import useResources, { type ResourceKey } from '@/stores/resources';
 import { watchEffect } from 'vue';
+
+import useResources, { type ResourceKey } from '@/stores/resources';
+
 import type { LawArticle } from '../types';
+
 import { incrementOrMultiply, lawsFilterer } from './utils';
 
 interface Props extends LawArticle {

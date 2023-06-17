@@ -1,9 +1,3 @@
-<style lang="scss" scoped>
-.fb-resources {
-  @apply grid grid-cols-3 h-max gap-2;
-}
-</style>
-
 <template>
   <div class="fb-resources">
     <fb-resources-happiness />
@@ -16,6 +10,10 @@
 </template>
 
 <script setup lang="ts">
-import FbResourcesItem from './FbResourcesItem.vue';
-import FbResourcesHappiness from './FbResourcesHappiness.vue';
 </script>
+
+<style lang="scss" scoped>
+.fb-resources {
+  @apply grid grid-cols-3 h-max gap-2;
+}
+</style>

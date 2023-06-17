@@ -11,7 +11,7 @@
   <br>
   <br>
   <br>
-  locale: {{locale}}
+  locale: {{ locale }}
   <br>
   <br>
   citizens:
@@ -19,19 +19,19 @@
   <br>
   <br>
   resources:
-  {{resources}}
+  {{ resources }}
   <br>
   <br>
   buildings:
-  {{buildings}}
+  {{ buildings }}
   <br>
   <br>
   happiness:
-  {{happiness}}
+  {{ happiness }}
   <br>
   <br>
   townHall:
-  {{townHall}}
+  {{ townHall }}
   <br>
   <br>
 
@@ -39,19 +39,18 @@
 </template>
 
 <script setup lang="ts">
-import useCitizens from '@/stores/citizens';
-import useResources from '@/stores/resources';
 
-import FbTownHall from '@/components/FbTownHall.vue';
-import FbJobs from '@/components/FbJobs.vue';
-import FbResources from '@/components/FbResources.vue';
-import FbBuildings from '@/components/FbBuildings.vue';
-import FbLaws from '@/components/FbLaws.vue';
-import FbTabs, { type Item } from '@/components/FbTabs.vue';
-import { locale } from '@/locale';
 import { ref } from 'vue';
+
+import FbBuildings from '@/components/FbBuildings.vue';
+import FbJobs from '@/components/FbJobs.vue';
+import FbLaws from '@/components/FbLaws.vue';
+import { type Item } from '@/components/FbTabs.vue';
+import { locale } from '@/locale';
 import useBuildings from '@/stores/buildings';
+import useCitizens from '@/stores/citizens';
 import useHappinessStore from '@/stores/happiness';
+import useResources from '@/stores/resources';
 import useTownHall from '@/stores/townHall';
 
 const citizens = useCitizens();

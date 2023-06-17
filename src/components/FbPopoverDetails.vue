@@ -5,24 +5,45 @@
     @mouseleave="hover = false"
   >
     <slot />
-    <div class="fb-popover-content" v-if="hover">
-      <div class="fb-popover-title">{{title}}</div>
+    <div
+      v-if="hover"
+      class="fb-popover-content"
+    >
+      <div class="fb-popover-title">
+        {{ title }}
+      </div>
       <div class="fb-popover-items">
         <div
+          v-for="(item, index) in data"
+          :key="index"
           class="fb-popover-item"
           :class="{
             'fb-popover-seperator': item.seperator,
           }"
-          v-for="(item, index) in data"
-          :key="index">
-          <div v-if="!item.seperator && item.label" class="fb-popover-item-label">
-            <fb-resource-icon v-if="item.resourceKey" :name="item.resourceKey">
+        >
+          <div
+            v-if="!item.seperator && item.label"
+            class="fb-popover-item-label"
+          >
+            <fb-resource-icon
+              v-if="item.resourceKey"
+              :name="item.resourceKey"
+            >
               <span v-html="item.label" />
             </fb-resource-icon>
             <fb-town-hall-image v-if="item.townHall" />
-            <span v-if="!item.resourceKey" v-html="item.label" />
+            <span
+              v-if="!item.resourceKey"
+              v-html="item.label"
+            />
           </div>
-          <div v-if="item.value" class="fb-popover-item-value" :class="`fb-popover-item-value-${item.type}`">{{ item.value }}</div>
+          <div
+            v-if="item.value"
+            class="fb-popover-item-value"
+            :class="`fb-popover-item-value-${item.type}`"
+          >
+            {{ item.value }}
+          </div>
         </div>
       </div>
     </div>
@@ -30,10 +51,9 @@
 </template>
 
 <script setup lang="ts">
-import type { ResourceKey } from '@/stores/resources';
 import { ref } from 'vue';
-import FbResourceIcon from './FbResourceIcon.vue';
-import FbTownHallImage from './FbTownHallImage.vue';
+
+import type { ResourceKey } from '@/stores/resources';
 
 export interface Item {
   seperator?: boolean,

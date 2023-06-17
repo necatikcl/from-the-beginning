@@ -1,5 +1,8 @@
 <template>
-  <fb-popover-details title="Happiness" :data="data">
+  <fb-popover-details
+    title="Happiness"
+    :data="data"
+  >
     <div
       class="fb-resources-happiness"
       :class="`fb-resources-happiness-${currentHappinessRange.value}`"
@@ -16,12 +19,13 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import useHappinessStore, { BASE_HAPPINESS } from '@/stores/happiness';
-import weightNumber from '@/utils/weightNumber';
+
 import { translate } from '@/locale';
 import type { MessageKey } from '@/locale/messages/en';
+import useHappinessStore, { BASE_HAPPINESS } from '@/stores/happiness';
 import formatNumber from '@/utils/formatNumber';
-import FbPopoverDetails from './FbPopoverDetails.vue';
+import weightNumber from '@/utils/weightNumber';
+
 import type { Item } from './FbPopoverDetails.vue';
 
 const happinessStore = useHappinessStore();

@@ -1,7 +1,12 @@
-import { ref, computed, watch } from 'vue';
 import { defineStore } from 'pinia';
+import { ref, computed, watch } from 'vue';
+
 import useNumberMap from '@/composables/useNumberMap';
+
+import type { Building } from '../../config/buildings';
 import useResources, { type ResourceKey } from '../resources';
+import useTownHall from '../townHall';
+
 import {
   useActiveLabour,
   useAvailableBuildings,
@@ -11,8 +16,6 @@ import {
   getBuildingRevenue,
   type LabourProgress,
 } from './utils';
-import type { Building } from '../../config/buildings';
-import useTownHall from '../townHall';
 
 const useBuildings = defineStore('buildings', () => {
   const owned = ref<Building['key'][]>([]);

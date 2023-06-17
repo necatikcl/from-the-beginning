@@ -16,20 +16,9 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "paths": {
-      "@api/*": ["./src/api/*"],
-      "@assets/*": ["./src/assets/*"],
-      "@components/*": ["./src/components/*"],
-      "@composables/*": ["./src/composables/*"],
-      "@containers/*": ["./src/containers/*"],
-      "@constants/*": ["./src/constants/*"],
-      "@constants": ["./src/constants/index"],
-      "@directives/*": ["./src/directives/*"],
-      "@locale/*": ["./src/locale/*"],
-      "@stores/*": ["./src/stores/*"],
-      "@utils/*": ["./src/utils/*"],
-      "/*": ["./*"]
+      "@/*": ["./src/*"]
     }
   },
-  "include": ["./src/**/*", "./components.d.ts"],
+  "include": ["./src/**/*", "./*.d.ts",],
   "exclude": ["node_modules/**/*", "node_modules/*", "node_modules", "**/node_modules"]
 }

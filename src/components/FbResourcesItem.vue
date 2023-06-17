@@ -1,20 +1,8 @@
-<style lang="scss" scoped>
-  .fb-resources-item {
-    @apply p-4 rounded-lg bg-gray-100 text-xl flex items-center h-66px;
-
-    &-icon {
-      @apply mr-2;
-    }
-
-    &-value {
-      @apply text-base flex items-center justify-between flex-1;
-    }
-
-  }
-</style>
-
 <template>
-  <fb-popover-details :title="title" :data="data">
+  <fb-popover-details
+    :title="title"
+    :data="data"
+  >
     <div class="fb-resources-item">
       <div class="fb-resources-item-icon">
         <fb-resource-icon :name="props.name" />
@@ -22,7 +10,10 @@
       <div class="fb-resources-item-value">
         {{ formatNumber(resource.value, 'compact') }}
 
-        <fb-badge type="secondary" v-if="resource.value === resource.capacity">
+        <fb-badge
+          v-if="resource.value === resource.capacity"
+          type="secondary"
+        >
           <fb-icon icon="boxes-stacked" />
         </fb-badge>
         <fb-badge
@@ -38,15 +29,15 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import formatNumber from '@/utils/formatNumber';
-import weightNumber from '@/utils/weightNumber';
+
+import type { Building } from '@/config/buildings';
+import { translate } from '@/locale';
 import type { ResourceKey } from '@/stores/resources';
 import useResources from '@/stores/resources';
-import { translate } from '@/locale';
-import type { Building } from '@/config/buildings';
-import FbBadge from './FbBadge.vue';
-import FbResourceIcon from './FbResourceIcon.vue';
-import FbPopoverDetails, { type Item } from './FbPopoverDetails.vue';
+import formatNumber from '@/utils/formatNumber';
+import weightNumber from '@/utils/weightNumber';
+
+import { type Item } from './FbPopoverDetails.vue';
 
 export interface Props {
   name: ResourceKey,
@@ -123,3 +114,18 @@ const data = computed<Item[]>(() => {
 
 const title = computed(() => translate(`resources.${props.name}`));
 </script>
+
+<style lang="scss" scoped>
+  .fb-resources-item {
+    @apply p-4 rounded-lg bg-gray-100 text-xl flex items-center h-66px;
+
+    &-icon {
+      @apply mr-2;
+    }
+
+    &-value {
+      @apply text-base flex items-center justify-between flex-1;
+    }
+
+  }
+</style>

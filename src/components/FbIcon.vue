@@ -1,5 +1,8 @@
 <template>
-  <font-awesome-icon :icon="icon" class="fb-icon" />
+  <font-awesome-icon
+    :icon="icon"
+    class="fb-icon"
+  />
 </template>
 
 <script setup lang="ts">

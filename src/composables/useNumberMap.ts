@@ -1,7 +1,8 @@
-import fixNumber from '@/utils/fixNumber';
 import {
   computed, ref, type ComputedRef, type Ref,
 } from 'vue';
+
+import fixNumber from '@/utils/fixNumber';
 
 type Data = { [key: string]: number };
 export interface NumberMap {
@@ -39,6 +40,7 @@ const useNumberMap = (defaultData?: Data): NumberMap => {
 
     if (!allowZeroRevenue && value === 0) {
       deleteItem(key);
+
       return;
     }
 

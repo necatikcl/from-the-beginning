@@ -1,5 +1,7 @@
-import useBuildings from '@/stores/buildings';
 import { watchEffect } from 'vue';
+
+import useBuildings from '@/stores/buildings';
+
 import type { LawArticle } from '../types';
 
 interface Props extends LawArticle {

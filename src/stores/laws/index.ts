@@ -1,16 +1,19 @@
 import { defineStore } from 'pinia';
+
 import useResources from '@/stores/resources';
+
 import useCitizens, { jobKeys } from '../citizens';
+
+import increaseBuildingProductions from './articles/increaseBuildingProductions';
+import increaseCitizenRecruitmentTime from './articles/increaseCitizenRecruitmentTime';
 import increaseFoodConsumption from './articles/increaseFoodConsumption';
-import increaseJobProduction from './articles/increaseJobProduction';
 import increaseIdleFoodProduction from './articles/increaseIdleFoodProduction';
-import createLaw from './utils';
+import increaseJobProduction from './articles/increaseJobProduction';
+import increasePopulationPenalty from './articles/increasePopulationPenalty';
+import increaseResourceProduction from './articles/increaseResourceProduction';
 import setHappinesBasedIdle from './articles/setHappinesBasedIdle';
 import setHappinessImpact from './articles/setHappinessImpact';
-import increaseResourceProduction from './articles/increaseResourceProduction';
-import increaseBuildingProductions from './articles/increaseBuildingProductions';
-import increasePopulationPenalty from './articles/increasePopulationPenalty';
-import increaseCitizenRecruitmentTime from './articles/increaseCitizenRecruitmentTime';
+import createLaw from './utils';
 
 const diligence = createLaw('diligence', (props) => {
   increaseJobProduction({
@@ -88,6 +91,7 @@ const land = createLaw('land', (props) => {
       const fromFarmers = citizens.jobs.farmers * 0.2;
 
       if (citizens.jobs.lumberjacks > citizens.jobs.farmers) return fromFarmers - 20;
+
       return fromFarmers;
     },
   });

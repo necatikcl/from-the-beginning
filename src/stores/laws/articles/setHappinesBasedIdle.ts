@@ -1,6 +1,8 @@
+import { watch } from 'vue';
+
 import useCitizens from '@/stores/citizens';
 import useHappinessStore from '@/stores/happiness';
-import { watch } from 'vue';
+
 import type { LawArticle } from '../types';
 
 interface Props extends LawArticle {

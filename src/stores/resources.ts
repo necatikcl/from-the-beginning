@@ -1,5 +1,6 @@
-import { computed, nextTick, ref } from 'vue';
 import { defineStore } from 'pinia';
+import { computed, nextTick, ref } from 'vue';
+
 import useNumberMap from '@/composables/useNumberMap';
 
 const INITIAL_RESOURCES = {

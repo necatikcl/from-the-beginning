@@ -4,17 +4,23 @@ module.exports = {
     browser: true,
     es2021: true,
     node: true,
+    'vue/setup-compiler-macros': true,
   },
   extends: [
     'plugin:vue/vue3-recommended',
-    'plugin:storybook/recommended',
     '@vue/typescript/recommended',
     'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
     'airbnb-base',
+    './.eslintrc-auto-import.json',
   ],
+  parser: 'vue-eslint-parser',
   parserOptions: {
+    parser: '@typescript-eslint/parser',
+    sourceType: 'module',
     ecmaVersion: 2021,
   },
+  plugins: ['@typescript-eslint', 'unused-imports'],
   rules: {
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
@@ -32,19 +38,11 @@ module.exports = {
     'no-unused-vars': 'off',
     'no-param-reassign': 'off',
     'unused-imports/no-unused-imports': 'error',
-    'unused-imports/no-unused-vars': [
-      'warn',
-      {
-        vars: 'all',
-        varsIgnorePattern: '^_',
-        args: 'after-used',
-        argsIgnorePattern: '^_',
-      },
-    ],
+    'unused-imports/no-unused-vars': 'off',
     'import/no-extraneous-dependencies': 'off',
     'import/no-unresolved': 'off',
     'import/extensions': 'off',
-    '@typescript-eslint/no-unused-vars': ['error'],
+    '@typescript-eslint/no-unused-vars': ['off'],
     'import/order': ['error', {
       'newlines-between': 'always',
       alphabetize: { order: 'asc', caseInsensitive: true },
@@ -60,8 +58,6 @@ module.exports = {
     ],
     'arrow-body-style': 'off',
     'newline-before-return': 'error',
-    'qwik/use-method-usage': 'off',
-    'qwik/jsx-img': 'off',
   },
   overrides: [
     {

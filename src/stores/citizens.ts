@@ -1,10 +1,12 @@
+import { defineStore } from 'pinia';
 import {
   ref, reactive, watch, computed, watchEffect,
 } from 'vue';
-import { defineStore } from 'pinia';
+
 import useNumberMap, { type NumberMap } from '@/composables/useNumberMap';
-import useResources, { type ResourceKey } from './resources';
+
 import useHappinessStore from './happiness';
+import useResources, { type ResourceKey } from './resources';
 
 export const jobKeys = ['farmers', 'merchants', 'lumberjacks', 'miners', 'builders'] as const;
 
@@ -103,6 +105,7 @@ const useCitizens = defineStore('citizens', () => {
   const assignJob = (jobName: Job, count: number) => {
     if (count < 0) {
       assignJob(jobName, 0);
+
       return;
     }
 

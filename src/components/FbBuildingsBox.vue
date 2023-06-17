@@ -1,5 +1,9 @@
 <template>
-  <fb-popover-details v-if="!owned && !hasProgress" :data="data" :title="title">
+  <fb-popover-details
+    v-if="!owned && !hasProgress"
+    :data="data"
+    :title="title"
+  >
     <fb-buildings-box-inner
       :building="building"
       :owned="owned"
@@ -16,13 +20,14 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import useResources from '@/stores/resources';
-import useBuildings from '@/stores/buildings';
+
 import type { Building } from '@/config/buildings';
 import { translate } from '@/locale';
+import useBuildings from '@/stores/buildings';
+import useResources from '@/stores/resources';
 import useTownHall from '@/stores/townHall';
-import FbPopoverDetails, { type Item } from './FbPopoverDetails.vue';
-import FbBuildingsBoxInner from './FbBuildingsBoxInner.vue';
+
+import { type Item } from './FbPopoverDetails.vue';
 
 export interface Props {
   building: Building,

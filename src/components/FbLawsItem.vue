@@ -1,3 +1,70 @@
+<template>
+  <button
+    type="button"
+    class="fb-laws-item"
+    :class="[
+      {
+        'fb-laws-item-active': law.active,
+      },
+      `fb-laws-item-${colors[law.key]}`,
+    ]"
+    @click="law.toggle"
+  >
+    <div class="fb-laws-item-badge">
+      <fb-icon icon="check-circle" />
+    </div>
+    <div class="fb-laws-item-title">
+      <div class="fb-laws-item-icon">
+        <fb-icon :icon="icons[lawKey]" />
+      </div>
+      {{ translate(`laws.${lawKey}`) }}
+    </div>
+    <ul class="fb-laws-item-features">
+      <li
+        v-for="feature in features"
+        :key="feature"
+        class="fb-laws-item-feature"
+      >
+        {{ feature }}
+      </li>
+    </ul>
+  </button>
+</template>
+
+<script setup lang="ts">
+import { computed } from 'vue';
+
+import { translate } from '@/locale';
+import useLaws from '@/stores/laws';
+import type { Law, LawKey } from '@/stores/laws/types';
+
+export interface Props {
+  lawKey: LawKey
+}
+
+const props = defineProps<Props>();
+
+const lawsStore = useLaws();
+
+const icons: { [K in LawKey]: string } = {
+  diligence: 'hand-fist',
+  land: 'leaf',
+  urbanization: 'city',
+  happiness: 'smile-beam',
+};
+
+const colors: { [K in LawKey]: string } = {
+  diligence: 'orange',
+  land: 'green',
+  urbanization: 'blue',
+  happiness: 'lime',
+};
+
+const law = computed(() => lawsStore.items.find((l) => l.key === props.lawKey) as Law);
+
+const features = computed(() => translate(`laws.${props.lawKey}.features`));
+</script>
+
 <style lang="scss" scoped>
 .fb-laws-item {
   @apply
@@ -95,65 +162,3 @@
   }
 }
 </style>
-
-<template>
-  <button
-    type="button"
-    class="fb-laws-item"
-    :class="[
-      {
-        'fb-laws-item-active': law.active,
-      },
-      `fb-laws-item-${colors[law.key]}`,
-    ]"
-    @click="law.toggle"
-  >
-    <div class="fb-laws-item-badge">
-      <fb-icon icon="check-circle" />
-    </div>
-    <div class="fb-laws-item-title">
-      <div class="fb-laws-item-icon">
-        <fb-icon :icon="icons[lawKey]" />
-      </div>
-      {{ translate(`laws.${lawKey}`) }}
-    </div>
-    <ul class="fb-laws-item-features">
-      <li class="fb-laws-item-feature" v-for="feature in features" :key="feature">
-        {{ feature }}
-      </li>
-    </ul>
-  </button>
-</template>
-
-<script setup lang="ts">
-import { translate } from '@/locale';
-import type { Law, LawKey } from '@/stores/laws/types';
-import { computed } from 'vue';
-import useLaws from '@/stores/laws';
-
-export interface Props {
-  lawKey: LawKey
-}
-
-const props = defineProps<Props>();
-
-const lawsStore = useLaws();
-
-const icons: { [K in LawKey]: string } = {
-  diligence: 'hand-fist',
-  land: 'leaf',
-  urbanization: 'city',
-  happiness: 'smile-beam',
-};
-
-const colors: { [K in LawKey]: string } = {
-  diligence: 'orange',
-  land: 'green',
-  urbanization: 'blue',
-  happiness: 'lime',
-};
-
-const law = computed(() => lawsStore.items.find((l) => l.key === props.lawKey) as Law);
-
-const features = computed(() => translate(`laws.${props.lawKey}.features`));
-</script>

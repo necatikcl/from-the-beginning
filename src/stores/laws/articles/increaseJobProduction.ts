@@ -1,7 +1,10 @@
+import { watchEffect } from 'vue';
+
 import type { NumberMap } from '@/composables/useNumberMap';
 import useCitizens, { type Job } from '@/stores/citizens';
-import { watchEffect } from 'vue';
+
 import type { LawArticle } from '../types';
+
 import { incrementOrMultiply, lawsFilterer } from './utils';
 
 const getRevenuePerSecond = (map: NumberMap) => map.getFilteredTotal(
