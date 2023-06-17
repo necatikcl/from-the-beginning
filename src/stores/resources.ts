@@ -5,8 +5,8 @@ import { computed, nextTick } from 'vue';
 import useNumberMap from '@/composables/useNumberMap';
 
 const INITIAL_RESOURCES = {
-  food: 250,
-  gold: 100,
+  food: 50,
+  gold: 10,
 } as const;
 
 export type ResourceKey = keyof typeof INITIAL_RESOURCES;
@@ -34,7 +34,7 @@ export const resourceHandler = (key: ResourceKey) => {
 
   const value = computed({
     get() {
-      return resource.value;
+      return Math.floor(resource.value);
     },
     set(val: number) {
       resource.value = Math.min(val, capacity.value);

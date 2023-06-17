@@ -4,6 +4,12 @@
     <fb-resources />
   </div>
   <fb-tabs :items="items" />
+  <button
+    class="fixed bottom-4 left-4"
+    @click="clearStorage"
+  >
+    Reset
+  </button>
   <br>
   <br>
   <br>
@@ -73,6 +79,11 @@ const items: Item[] = [
     key: 'religion',
   },
 ];
+
+const clearStorage = () => {
+  localStorage.clear();
+  window.location.reload();
+};
 
 // @ts-ignore
 window.admin = {

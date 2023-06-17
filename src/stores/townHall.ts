@@ -25,7 +25,6 @@ const useTownHall = defineStore('townHall', () => {
       const levelConfig = config[level.value];
 
       resources[key].setCapacity(key, levelConfig.capacities[key]);
-      resources[key].setRevenue('buildings.townHall', levelConfig.revenue[key]);
     });
   }, { immediate: true });
 
