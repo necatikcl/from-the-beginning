@@ -36,6 +36,10 @@ const data = {
     icon: '',
     color: 'green',
   },
+  science: {
+    icon: 'flask',
+    color: 'blue',
+  },
 } as const;
 
 type Data = typeof data;
@@ -75,20 +79,12 @@ const icon = computed(() => {
       @apply text-yellow-500;
     }
 
-    &-green {
-      @apply text-green-500;
-    }
-
-    &-purple {
-      @apply text-purple-500;
-    }
-
-    &-pink {
-      @apply text-pink-500;
-    }
-
     &-indigo {
       @apply text-indigo-500;
+    }
+
+    &-blue {
+      @apply text-blue-500;
     }
   }
 </style>

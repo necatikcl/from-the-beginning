@@ -2,6 +2,7 @@
   <div class="fb-resources">
     <fb-resources-happiness />
     <fb-resources-labour />
+    <fb-resources-science />
     <fb-resources-item name="food" />
     <fb-resources-item name="gold" />
   </div>

@@ -2,14 +2,14 @@ import { defineStore } from 'pinia';
 
 import useNumberMap from '@/composables/useNumberMap';
 
-const useLabourStore = defineStore('labour', () => {
+const useScienceStore = defineStore('science', () => {
   const {
     data: revenues,
     total: value,
     deleteItem: deleteRevenue,
     setItem: setRevenue,
     getFilteredTotal: getFilteredTotalRevenue,
-  } = useNumberMap('labour');
+  } = useNumberMap('science');
 
   return {
     revenues,
@@ -20,4 +20,4 @@ const useLabourStore = defineStore('labour', () => {
   };
 });
 
-export default useLabourStore;
+export default useScienceStore;

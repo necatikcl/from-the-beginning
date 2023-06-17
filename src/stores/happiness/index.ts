@@ -5,12 +5,14 @@ import useNumberMap from '@/composables/useNumberMap';
 
 import useLabourStore from '../labour';
 import useResources, { resourceKeys } from '../resources';
+import useScienceStore from '../science';
 
 export const BASE_HAPPINESS = 100;
 
 const useHappinessStore = defineStore('happiness', () => {
   const resources = useResources();
   const labour = useLabourStore();
+  const science = useScienceStore();
 
   const {
     data: happinessImpacts,
@@ -30,23 +32,18 @@ const useHappinessStore = defineStore('happiness', () => {
   watchEffect(() => {
     const revenuePercentage = bonusRevenue.value / 100;
 
-    resourceKeys.forEach((key) => {
-      const resource = resources[key];
-
-      const revenuePerSecond = resource.getFilteredTotalRevenue(
+    [
+      ...resourceKeys.map((key) => resources[key]),
+      labour,
+      science,
+    ].forEach((store) => {
+      const revenuePerSecond = store.getFilteredTotalRevenue(
         'resources.happiness',
         (value) => value > 0,
       );
 
-      resource.setRevenue('resources.happiness', revenuePerSecond * revenuePercentage);
+      store.setRevenue('resources.happiness', revenuePerSecond * revenuePercentage);
     });
-
-    const revenuePerSecond = labour.getFilteredImpacts(
-      'resources.happiness',
-      (value) => value > 0,
-    );
-
-    labour.setImpact('resources.happiness', revenuePerSecond * revenuePercentage);
   });
 
   return {

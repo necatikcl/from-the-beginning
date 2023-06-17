@@ -9,7 +9,7 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    copy: typeof import('./src/components/FbResourcesHappiness copy.vue')['default']
+    copy: typeof import('./src/components/FbResourcesLabour copy.vue')['default']
     FbBadge: typeof import('./src/components/FbBadge.vue')['default']
     FbBuildings: typeof import('./src/components/FbBuildings.vue')['default']
     FbBuildingsBox: typeof import('./src/components/FbBuildingsBox.vue')['default']
@@ -28,6 +28,7 @@ declare module '@vue/runtime-core' {
     FbResourcesHappiness: typeof import('./src/components/FbResourcesHappiness.vue')['default']
     FbResourcesItem: typeof import('./src/components/FbResourcesItem.vue')['default']
     FbResourcesLabour: typeof import('./src/components/FbResourcesLabour.vue')['default']
+    FbResourcesScience: typeof import('./src/components/FbResourcesScience.vue')['default']
     FbSymbol: typeof import('./src/components/FbSymbol.vue')['default']
     FbTabs: typeof import('./src/components/FbTabs.vue')['default']
     FbTownHall: typeof import('./src/components/FbTownHall.vue')['default']

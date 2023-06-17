@@ -23,6 +23,7 @@ const en = {
   'resources.gold': 'Gold',
   'resources.labour': 'Labour',
   'resources.capacity': 'Capacity',
+  'resources.science': 'Science',
 
   'tabs.jobs': 'Jobs',
   'tabs.buildings': 'Buildings',

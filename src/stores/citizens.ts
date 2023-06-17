@@ -11,6 +11,7 @@ import storage from '@/utils/storage';
 import useHappinessStore from './happiness';
 import useLabourStore from './labour';
 import useResources, { type ResourceKey } from './resources';
+import useScienceStore from './science';
 
 export const jobKeys = ['farmers', 'merchants', 'builders'] as const;
 
@@ -29,6 +30,7 @@ const useCitizens = defineStore('citizens', () => {
   const resources = useResources();
   const labour = useLabourStore();
   const happinessStore = useHappinessStore();
+  const science = useScienceStore();
 
   const citizenCount = useStorage('citizens.citizenCount', 5);
 
@@ -83,6 +85,8 @@ const useCitizens = defineStore('citizens', () => {
     resources.food.setRevenue('citizens', citizenCount.value * foodConsumption.total.value);
   }, { immediate: true });
 
+  watch(citizenCount, () => science.setRevenue('citizens', citizenCount.value * 0.1));
+
   resources.addTickListener(() => {
     if (resources.food.value < 0) {
       citizenCount.value -= 1;
@@ -98,7 +102,7 @@ const useCitizens = defineStore('citizens', () => {
         const value = jobs[jobKey] * jobIncrements[jobKey].total.value;
 
         if (jobKey === 'builders') {
-          labour.setImpact(key, value);
+          labour.setRevenue(key, value);
         } else {
           resources[resourceKey as ResourceKey].setRevenue(key, value);
         }

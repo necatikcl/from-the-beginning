@@ -48,7 +48,7 @@ const remainingBuildingSeconds = computed(() => {
 const data = computed(() => {
   const items: Item[] = [];
 
-  getObjectEntries(labour.impacts).forEach(([_key, value]) => {
+  getObjectEntries(labour.revenues).forEach(([_key, value]) => {
     const key = _key as MessageKey;
     const { type, text } = weightNumber(value);
 

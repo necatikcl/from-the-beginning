@@ -37,7 +37,7 @@ export default ({
         newValue = incrementOrMultiply({
           active: willWork,
           multiplier,
-          currentValue: () => labour.getFilteredImpacts(
+          currentValue: () => labour.getFilteredTotalRevenue(
             LAW_KEY,
             (val) => val > 0,
           ),
@@ -45,6 +45,6 @@ export default ({
       }
     }
 
-    labour.setImpact(LAW_KEY, newValue);
+    labour.setRevenue(LAW_KEY, newValue);
   });
 };
