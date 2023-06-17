@@ -66,6 +66,17 @@
     "watch": true,
     "watchEffect": true,
     "watchPostEffect": true,
-    "watchSyncEffect": true
+    "watchSyncEffect": true,
+    "BASE_HAPPINESS": true,
+    "citizens": true,
+    "happiness": true,
+    "jobKeys": true,
+    "jobResourceMap": true,
+    "resourceHandler": true,
+    "resourceKeys": true,
+    "resources": true,
+    "townHall": true,
+    "locale": true,
+    "translate": true
   }
 }

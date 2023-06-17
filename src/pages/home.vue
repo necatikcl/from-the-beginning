@@ -4,9 +4,10 @@
     <fb-resources />
   </div>
   <fb-tabs :items="items" />
-  <!-- <fb-jobs />
-  <fb-buildings /> -->
-  <br>
+  <fb-jobs />
+  <fb-buildings />
+  {{ translate("sdfsafasdf")  }}
+  <!-- <br>
   <br>
   <br>
   <br>
@@ -35,7 +36,7 @@
   <br>
   <br>
 
-  {{ count * 2 }}
+  {{ count * 2 }} -->
 </template>
 
 <script setup lang="ts">
