@@ -43,6 +43,8 @@ module.exports = {
     'import/no-unresolved': 'off',
     'import/extensions': 'off',
     '@typescript-eslint/no-unused-vars': ['off'],
+    'vue/no-v-html': 'off',
+    'vue/multi-word-component-names': 'off',
     'import/order': ['error', {
       'newlines-between': 'always',
       alphabetize: { order: 'asc', caseInsensitive: true },
@@ -63,9 +65,7 @@ module.exports = {
     {
       files: ['*.vue'],
       rules: {
-        'max-len': ['error', {
-          code: 120,
-        }],
+        'max-len': 'off',
       },
     },
     {

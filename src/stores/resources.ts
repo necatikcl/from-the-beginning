@@ -86,10 +86,10 @@ const useResources = defineStore('resources', () => {
     tickHooks.forEach((fn) => fn());
   };
 
-  let interval: NodeJS.Timer | 0 = 0;
+  let interval = 0;
 
   clearInterval(interval);
-  interval = setInterval(tick, 1000);
+  interval = window.setInterval(tick, 1000);
 
   return {
     food,

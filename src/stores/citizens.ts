@@ -10,6 +10,9 @@ import useResources, { type ResourceKey } from './resources';
 
 export const jobKeys = ['farmers', 'merchants', 'lumberjacks', 'miners', 'builders'] as const;
 
+type JobList = typeof jobKeys;
+export type Job = JobList[number];
+
 export const jobResourceMap: {
   [K in Job]: ResourceKey;
 } = {
@@ -19,9 +22,6 @@ export const jobResourceMap: {
   miners: 'iron',
   builders: 'labour',
 } as const;
-
-type JobList = typeof jobKeys;
-export type Job = JobList[number];
 
 const useTypedJobs = <T extends object = { [K in Job]: number }>
   (defaultStates: T) => reactive<T>(defaultStates);
