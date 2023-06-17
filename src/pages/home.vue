@@ -4,9 +4,6 @@
     <fb-resources />
   </div>
   <fb-tabs :items="items" />
-  <fb-jobs />
-  <fb-buildings />
-  {{ translate("sdfsafasdf")  }}
   <!-- <br>
   <br>
   <br>

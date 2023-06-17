@@ -1,9 +1,6 @@
 <template>
   <img
-    :src="TownHallImage"
+    src="@/assets/town-hall.png"
     alt="townhall"
   >
 </template>
-
-<script setup lang="ts">
-</script>

@@ -77,6 +77,17 @@
     "resources": true,
     "townHall": true,
     "locale": true,
-    "translate": true
+    "translate": true,
+    "buildings": true,
+    "createConfig": true,
+    "fixNumbers": true,
+    "formatMs": true,
+    "formatNumber": true,
+    "useHappinessStore": true,
+    "useNumberMap": true,
+    "useResources": true,
+    "useTownHall": true,
+    "weightNumber": true,
+    "fixNumber": true
   }
 }

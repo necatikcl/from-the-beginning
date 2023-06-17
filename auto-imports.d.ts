@@ -6,13 +6,19 @@ export {}
 declare global {
   const BASE_HAPPINESS: typeof import('./src/stores/happiness')['BASE_HAPPINESS']
   const EffectScope: typeof import('vue')['EffectScope']
+  const buildings: typeof import('./src/config/buildings')['default']
   const citizens: typeof import('./src/stores/citizens')['default']
   const computed: typeof import('vue')['computed']
   const createApp: typeof import('vue')['createApp']
+  const createConfig: typeof import('./src/utils/createConfig')['default']
   const customRef: typeof import('vue')['customRef']
   const defineAsyncComponent: typeof import('vue')['defineAsyncComponent']
   const defineComponent: typeof import('vue')['defineComponent']
   const effectScope: typeof import('vue')['effectScope']
+  const fixNumber: typeof import('./src/utils/fixNumber')['default']
+  const fixNumbers: typeof import('./src/utils/fixNumber')['fixNumbers']
+  const formatMs: typeof import('./src/utils/formatMs')['default']
+  const formatNumber: typeof import('./src/utils/formatNumber')['default']
   const getCurrentInstance: typeof import('vue')['getCurrentInstance']
   const getCurrentScope: typeof import('vue')['getCurrentScope']
   const h: typeof import('vue')['h']
@@ -64,16 +70,21 @@ declare global {
   const useAttrs: typeof import('vue')['useAttrs']
   const useCssModule: typeof import('vue')['useCssModule']
   const useCssVars: typeof import('vue')['useCssVars']
+  const useHappinessStore: typeof import('./src/stores/happiness')['useHappinessStore']
   const useLink: typeof import('vue-router')['useLink']
   const useMouse: typeof import('@vueuse/core')['useMouse']
   const useMyFetch: typeof import('@vueuse/core')['useFetch']
+  const useNumberMap: typeof import('./src/composables/useNumberMap')['default']
+  const useResources: typeof import('./src/stores/resources')['useResources']
   const useRoute: typeof import('vue-router')['useRoute']
   const useRouter: typeof import('vue-router')['useRouter']
   const useSlots: typeof import('vue')['useSlots']
+  const useTownHall: typeof import('./src/stores/townHall')['useTownHall']
   const watch: typeof import('vue')['watch']
   const watchEffect: typeof import('vue')['watchEffect']
   const watchPostEffect: typeof import('vue')['watchPostEffect']
   const watchSyncEffect: typeof import('vue')['watchSyncEffect']
+  const weightNumber: typeof import('./src/utils/weightNumber')['default']
 }
 // for type re-export
 declare global {
@@ -91,10 +102,14 @@ declare module 'vue' {
     readonly citizens: UnwrapRef<typeof import('./src/stores/citizens')['default']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly createApp: UnwrapRef<typeof import('vue')['createApp']>
+    readonly createConfig: UnwrapRef<typeof import('./src/utils/createConfig')['default']>
     readonly customRef: UnwrapRef<typeof import('vue')['customRef']>
     readonly defineAsyncComponent: UnwrapRef<typeof import('vue')['defineAsyncComponent']>
     readonly defineComponent: UnwrapRef<typeof import('vue')['defineComponent']>
     readonly effectScope: UnwrapRef<typeof import('vue')['effectScope']>
+    readonly fixNumber: UnwrapRef<typeof import('./src/utils/fixNumber')['default']>
+    readonly formatMs: UnwrapRef<typeof import('./src/utils/formatMs')['default']>
+    readonly formatNumber: UnwrapRef<typeof import('./src/utils/formatNumber')['default']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
@@ -149,6 +164,7 @@ declare module 'vue' {
     readonly useLink: UnwrapRef<typeof import('vue-router')['useLink']>
     readonly useMouse: UnwrapRef<typeof import('@vueuse/core')['useMouse']>
     readonly useMyFetch: UnwrapRef<typeof import('@vueuse/core')['useFetch']>
+    readonly useNumberMap: UnwrapRef<typeof import('./src/composables/useNumberMap')['default']>
     readonly useRoute: UnwrapRef<typeof import('vue-router')['useRoute']>
     readonly useRouter: UnwrapRef<typeof import('vue-router')['useRouter']>
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
@@ -156,6 +172,7 @@ declare module 'vue' {
     readonly watchEffect: UnwrapRef<typeof import('vue')['watchEffect']>
     readonly watchPostEffect: UnwrapRef<typeof import('vue')['watchPostEffect']>
     readonly watchSyncEffect: UnwrapRef<typeof import('vue')['watchSyncEffect']>
+    readonly weightNumber: UnwrapRef<typeof import('./src/utils/weightNumber')['default']>
   }
 }
 declare module '@vue/runtime-core' {
@@ -165,10 +182,14 @@ declare module '@vue/runtime-core' {
     readonly citizens: UnwrapRef<typeof import('./src/stores/citizens')['default']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly createApp: UnwrapRef<typeof import('vue')['createApp']>
+    readonly createConfig: UnwrapRef<typeof import('./src/utils/createConfig')['default']>
     readonly customRef: UnwrapRef<typeof import('vue')['customRef']>
     readonly defineAsyncComponent: UnwrapRef<typeof import('vue')['defineAsyncComponent']>
     readonly defineComponent: UnwrapRef<typeof import('vue')['defineComponent']>
     readonly effectScope: UnwrapRef<typeof import('vue')['effectScope']>
+    readonly fixNumber: UnwrapRef<typeof import('./src/utils/fixNumber')['default']>
+    readonly formatMs: UnwrapRef<typeof import('./src/utils/formatMs')['default']>
+    readonly formatNumber: UnwrapRef<typeof import('./src/utils/formatNumber')['default']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
@@ -223,6 +244,7 @@ declare module '@vue/runtime-core' {
     readonly useLink: UnwrapRef<typeof import('vue-router')['useLink']>
     readonly useMouse: UnwrapRef<typeof import('@vueuse/core')['useMouse']>
     readonly useMyFetch: UnwrapRef<typeof import('@vueuse/core')['useFetch']>
+    readonly useNumberMap: UnwrapRef<typeof import('./src/composables/useNumberMap')['default']>
     readonly useRoute: UnwrapRef<typeof import('vue-router')['useRoute']>
     readonly useRouter: UnwrapRef<typeof import('vue-router')['useRouter']>
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
@@ -230,5 +252,6 @@ declare module '@vue/runtime-core' {
     readonly watchEffect: UnwrapRef<typeof import('vue')['watchEffect']>
     readonly watchPostEffect: UnwrapRef<typeof import('vue')['watchPostEffect']>
     readonly watchSyncEffect: UnwrapRef<typeof import('vue')['watchSyncEffect']>
+    readonly weightNumber: UnwrapRef<typeof import('./src/utils/weightNumber')['default']>
   }
 }
