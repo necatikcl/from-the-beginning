@@ -8,7 +8,6 @@ import increaseFoodConsumption from './articles/increaseFoodConsumption';
 import increaseIdleFoodProduction from './articles/increaseIdleFoodProduction';
 import increaseJobProduction from './articles/increaseJobProduction';
 import increasePopulationPenalty from './articles/increasePopulationPenalty';
-import increaseResourceProduction from './articles/increaseResourceProduction';
 import setHappinesBasedIdle from './articles/setHappinesBasedIdle';
 import setHappinessImpact from './articles/setHappinessImpact';
 import setLabourImpact from './articles/setLabourImpact';
