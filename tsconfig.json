@@ -1,15 +1,35 @@
 {
-  "files": [],
-  "references": [
-    {
-      "path": "./tsconfig.config.json"
-    },
-    {
-      "path": "./tsconfig.app.json"
-    },
-    {
-      "path": "./tsconfig.vitest.json"
+  "compilerOptions": {
+    "baseUrl": ".",
+    "target": "ESNext",
+    "lib": ["ESNext", "DOM"],
+    "moduleResolution": "Node",
+    "allowJs": true,
+    "strict": true,
+    "module": "ESNext",
+    "rootDir": "src",
+    "outDir": "dist",
+    "jsx": "preserve",
+    "types": ["vite/client", "vite-plugin-pages/client"],
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "paths": {
+      "@api/*": ["./src/api/*"],
+      "@assets/*": ["./src/assets/*"],
+      "@components/*": ["./src/components/*"],
+      "@composables/*": ["./src/composables/*"],
+      "@containers/*": ["./src/containers/*"],
+      "@constants/*": ["./src/constants/*"],
+      "@constants": ["./src/constants/index"],
+      "@directives/*": ["./src/directives/*"],
+      "@locale/*": ["./src/locale/*"],
+      "@stores/*": ["./src/stores/*"],
+      "@utils/*": ["./src/utils/*"],
+      "/*": ["./*"]
     }
-  ],
+  },
+  "include": ["./src/**/*", "./components.d.ts"],
+  "exclude": ["node_modules/**/*", "node_modules/*", "node_modules", "**/node_modules"]
 }
- 

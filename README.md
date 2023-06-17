@@ -1,52 +1,22 @@
-# fromTheBeginning
+# Wope Frontend
 
-This template should help get you started developing with Vue 3 in Vite.
+### [Stage](https://app.wope.dev/)
+### [Storybook](https://storybook.wope.dev/)
 
-## Recommended IDE Setup
+---
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+## Development
 
-## Type Support for `.vue` Imports in TS
+Storbook üzerinde projeyi nasıl geliştirdiğimiz, hangi ortam ve sass değişkenlerini kullandığımız ile ilgili bir Guideline bulunuyor. Başlamadan önce aşağıdaki başlıkları incelemende fayda var.
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+[Typography](https://develop--6066e257b7d3a20021624ac5.chromatic.com/?path=/story/guidelines-typography--page)
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+[Colors](https://develop--6066e257b7d3a20021624ac5.chromatic.com/?path=/story/guidelines-colors--page)
 
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+[Icons](https://develop--6066e257b7d3a20021624ac5.chromatic.com/?path=/story/guidelines-icons--page)
 
-## Customize configuration
+[Spacing](https://develop--6066e257b7d3a20021624ac5.chromatic.com/?path=/story/guidelines-spacing--page)
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+[Border](https://develop--6066e257b7d3a20021624ac5.chromatic.com/?path=/story/guidelines-border--page)
 
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Run Unit Tests with [Vitest](https://vitest.dev/)
-
-```sh
-npm run test:unit
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+[Mixin](https://develop--6066e257b7d3a20021624ac5.chromatic.com/?path=/story/guidelines-mixins--page)
