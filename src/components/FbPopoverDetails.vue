@@ -79,11 +79,11 @@ const hover = ref(false);
 
 <style lang="scss" scoped>
   .fb-popover {
-    @apply relative;
+    @apply relative w-full;
 
     &-content {
       @apply
-      min-w-48
+      min-w-48 w-full
         pointer-events-none
         absolute
         top-full
@@ -98,7 +98,7 @@ const hover = ref(false);
     }
 
     &-item {
-      @apply flex items-center justify-between;
+      @apply flex items-center justify-between text-xs leading-5;
 
       &-label {
         @apply mr-4 flex items-center;
@@ -125,11 +125,11 @@ const hover = ref(false);
     }
 
     &-seperator {
-      @apply border-t border-gray-200 my-2;
+      @apply border-t border-gray-200 my-1.5;
     }
 
     &-title {
-      @apply font-bold text-xl mb-2;
+      @apply font-bold text-lg mb-2;
     }
   }
 </style>

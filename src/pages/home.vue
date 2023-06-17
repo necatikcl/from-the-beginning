@@ -39,6 +39,10 @@
     {{ townHall }}
     <br>
     <br>
+    labour:
+    {{ labour }}
+    <br>
+    <br>
   </template>
 </template>
 
@@ -52,6 +56,7 @@ import { locale } from '@/locale';
 import useBuildings from '@/stores/buildings';
 import useCitizens from '@/stores/citizens';
 import useHappinessStore from '@/stores/happiness';
+import useLabourStore from '@/stores/labour';
 import useResources from '@/stores/resources';
 import useTownHall from '@/stores/townHall';
 
@@ -62,6 +67,7 @@ const resources = useResources();
 const buildings = useBuildings();
 const happiness = useHappinessStore();
 const townHall = useTownHall();
+const labour = useLabourStore();
 
 const items: Item[] = [
   {

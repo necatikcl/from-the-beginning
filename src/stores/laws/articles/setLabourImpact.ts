@@ -28,19 +28,21 @@ export default ({
 
     let newValue = 0;
 
-    if (willWork && value) {
-      newValue = typeof value === 'function' ? value() : value;
-    }
+    if (willWork) {
+      if (willWork && value) {
+        newValue = typeof value === 'function' ? value() : value;
+      }
 
-    if (multiplier) {
-      newValue = incrementOrMultiply({
-        active: willWork,
-        multiplier,
-        currentValue: () => labour.getFilteredImpacts(
-          '',
-          (val) => val > 0,
-        ),
-      });
+      if (multiplier) {
+        newValue = incrementOrMultiply({
+          active: willWork,
+          multiplier,
+          currentValue: () => labour.getFilteredImpacts(
+            LAW_KEY,
+            (val) => val > 0,
+          ),
+        });
+      }
     }
 
     labour.setImpact(LAW_KEY, newValue);

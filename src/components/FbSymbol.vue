@@ -64,7 +64,7 @@ const icon = computed(() => {
     @apply flex items-center;
 
     &-text {
-      @apply ml-2;
+      @apply ml-1;
     }
 
     &-cyan {

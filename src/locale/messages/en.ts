@@ -57,7 +57,6 @@ const en = {
   'laws.land.features': [
     'Farmers produce 2x food and 0.2 happiness',
     'Halves all buildings production',
-    'Happiness -20 when lumberjack count exceeds farmer count.',
   ],
 
   'laws.urbanization': 'Urbanization Law',
